@@ -1,0 +1,7 @@
+{
+  "name": "com.jonghyun.core",
+  "version": "0.1.0",
+  "displayName": "Jonghyun Core",
+  "description": "게임 공통 모듈 (성능 측정, 저장, 광고, 분석)",
+  "unity": "6000.3"
+}
