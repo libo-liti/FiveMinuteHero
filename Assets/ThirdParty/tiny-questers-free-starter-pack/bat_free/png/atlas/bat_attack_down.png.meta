@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: a7958ca5dbad439459779722d38746fc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1993087577996605563
+    second: bat_attack_down_0
+  - first:
+      213: 8746855992804721805
+    second: bat_attack_down_1
+  - first:
+      213: -6356322321462404276
+    second: bat_attack_down_2
+  - first:
+      213: 512918494633143949
+    second: bat_attack_down_3
+  - first:
+      213: 2325491041836370466
+    second: bat_attack_down_4
+  - first:
+      213: -6742413671167724125
+    second: bat_attack_down_5
+  - first:
+      213: 8659880785476619655
+    second: bat_attack_down_6
+  - first:
+      213: -2815094944560429285
+    second: bat_attack_down_7
+  - first:
+      213: 3752048273939309030
+    second: bat_attack_down_8
+  - first:
+      213: -3976437612815419072
+    second: bat_attack_down_9
+  - first:
+      213: 3205116066309387144
+    second: bat_attack_down_10
+  - first:
+      213: -5239658085793486803
+    second: bat_attack_down_11
+  - first:
+      213: 2194822205945970597
+    second: bat_attack_down_12
+  - first:
+      213: -4737063264256115010
+    second: bat_attack_down_13
+  - first:
+      213: -28076644895612352
+    second: bat_attack_down_14
+  - first:
+      213: 3820660403650687643
+    second: bat_attack_down_15
+  - first:
+      213: 1837547504401574678
+    second: bat_attack_down_16
+  - first:
+      213: -970874630866897063
+    second: bat_attack_down_17
+  - first:
+      213: -4495927446851202559
+    second: bat_attack_down_18
+  - first:
+      213: 9131770605563807653
+    second: bat_attack_down_19
+  - first:
+      213: 8121648506455330583
+    second: bat_attack_down_20
+  - first:
+      213: -8436938498411985787
+    second: bat_attack_down_21
+  - first:
+      213: 92028555217181636
+    second: bat_attack_down_22
+  - first:
+      213: 7602493982672513054
+    second: bat_attack_down_23
+  - first:
+      213: 2569023797939241672
+    second: bat_attack_down_24
+  - first:
+      213: -8039445835775384259
+    second: bat_attack_down_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bat_attack_down_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 95
+        width: 57
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587c44b58612754e0800000000000000
+      internalID: -1993087577996605563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 96
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d844f90ce23136970800000000000000
+      internalID: 8746855992804721805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 87
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4bd85f968ec9c7a0800000000000000
+      internalID: -6356322321462404276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_3
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 95
+        width: 57
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e265f37a04e1700800000000000000
+      internalID: 512918494633143949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 94
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a820518cdc54020800000000000000
+      internalID: 2325491041836370466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 83
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a57f492d722e62a0800000000000000
+      internalID: -6742413671167724125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_6
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 95
+        width: 57
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78d809f31b31e2870800000000000000
+      internalID: 8659880785476619655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_7
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 96
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b174a7c1016cee8d0800000000000000
+      internalID: -2815094944560429285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_8
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 87
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e12544a604f11430800000000000000
+      internalID: 3752048273939309030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_9
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 95
+        width: 57
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04972a82f0bd0d8c0800000000000000
+      internalID: -3976437612815419072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_10
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 94
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 883b444b41cda7c20800000000000000
+      internalID: 3205116066309387144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_11
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 83
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d28a6cb5bbef847b0800000000000000
+      internalID: -5239658085793486803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_12
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 67
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5af7c8aea23957e10800000000000000
+      internalID: 2194822205945970597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_13
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 57
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe36772f02924eb0800000000000000
+      internalID: -4737063264256115010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_14
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 35
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0422382b0704c9ff0800000000000000
+      internalID: -28076644895612352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_15
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 24
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b92fff6f466b50530800000000000000
+      internalID: 3820660403650687643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_16
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 30
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61be2c138b7408910800000000000000
+      internalID: 1837547504401574678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_17
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 34
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9577db9caa2c682f0800000000000000
+      internalID: -970874630866897063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_18
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 29
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102518abec14b91c0800000000000000
+      internalID: -4495927446851202559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_19
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 9
+        width: 102
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a70cfacbf09abe70800000000000000
+      internalID: 9131770605563807653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_20
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 19
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71f0ad94944e5b070800000000000000
+      internalID: 8121648506455330583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_21
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 14
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5840652f229f9ea80800000000000000
+      internalID: -8436938498411985787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_22
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 26
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb99eebb73f64100800000000000000
+      internalID: 92028555217181636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_23
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 13
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e186d3c5ffb718960800000000000000
+      internalID: 7602493982672513054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_24
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 15
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c281bf688107a320800000000000000
+      internalID: 2569023797939241672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bat_attack_down_25
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d356d9f6b962e6090800000000000000
+      internalID: -8039445835775384259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bat_attack_down_0: -1993087577996605563
+      bat_attack_down_1: 8746855992804721805
+      bat_attack_down_10: 3205116066309387144
+      bat_attack_down_11: -5239658085793486803
+      bat_attack_down_12: 2194822205945970597
+      bat_attack_down_13: -4737063264256115010
+      bat_attack_down_14: -28076644895612352
+      bat_attack_down_15: 3820660403650687643
+      bat_attack_down_16: 1837547504401574678
+      bat_attack_down_17: -970874630866897063
+      bat_attack_down_18: -4495927446851202559
+      bat_attack_down_19: 9131770605563807653
+      bat_attack_down_2: -6356322321462404276
+      bat_attack_down_20: 8121648506455330583
+      bat_attack_down_21: -8436938498411985787
+      bat_attack_down_22: 92028555217181636
+      bat_attack_down_23: 7602493982672513054
+      bat_attack_down_24: 2569023797939241672
+      bat_attack_down_25: -8039445835775384259
+      bat_attack_down_3: 512918494633143949
+      bat_attack_down_4: 2325491041836370466
+      bat_attack_down_5: -6742413671167724125
+      bat_attack_down_6: 8659880785476619655
+      bat_attack_down_7: -2815094944560429285
+      bat_attack_down_8: 3752048273939309030
+      bat_attack_down_9: -3976437612815419072
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

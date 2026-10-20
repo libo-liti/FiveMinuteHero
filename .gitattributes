@@ -1,0 +1,15 @@
+# 줄바꿈 통일: Unity/Rider(Windows)와 Claude Code가 섞여도 diff가 깨지지 않게
+* text=auto
+*.cs text diff=csharp
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+*.mat text eol=lf
+*.anim text eol=lf
+*.controller text eol=lf
+*.png binary
+*.jpg binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
