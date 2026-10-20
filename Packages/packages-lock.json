@@ -17,6 +17,12 @@
       },
       "hash": "81542a7e86292b5c4c21b1782c5af23b567f45ce"
     },
+    "com.jonghyun.core": {
+      "version": "file:com.jonghyun.core",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "13.0.6",
       "depth": 0,
