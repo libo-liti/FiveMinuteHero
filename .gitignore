@@ -112,3 +112,7 @@ InitTestScene*.unity*
 /[Aa]ssets/[Tt]hird[Pp]arty/**
 !/[Aa]ssets/[Tt]hird[Pp]arty/**/
 !/[Aa]ssets/[Tt]hird[Pp]arty/**/*.meta
+
+# Unity MCP 스크린샷 (테스트용 캡처)
+/[Aa]ssets/[Ss]creenshots/
+/[Aa]ssets/[Ss]creenshots.meta
