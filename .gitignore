@@ -116,3 +116,9 @@ InitTestScene*.unity*
 # Unity MCP 스크린샷 (테스트용 캡처)
 /[Aa]ssets/[Ss]creenshots/
 /[Aa]ssets/[Ss]creenshots.meta
+
+# Rider 프로젝트별 설정 폴더
+.idea/
+
+# Rider MCP 로컬 설정 (개인 PC 포트 포함)
+/[Aa]ssets/.mcp.json
