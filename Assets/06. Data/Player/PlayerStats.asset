@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04575a0458cb5234fbea19743d87a03a, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerStats
-  _moveSpeed: 3
+  _moveSpeed: 5
