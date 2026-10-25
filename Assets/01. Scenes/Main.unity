@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 480897051}
   - component: {fileID: 480897050}
   - component: {fileID: 480897055}
+  - component: {fileID: 480897056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -465,6 +466,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerHealth
   _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
   _movement: {fileID: 480897050}
+--- !u!210 &480897056
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480897049}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &689824800
 GameObject:
   m_ObjectHideFlags: 0

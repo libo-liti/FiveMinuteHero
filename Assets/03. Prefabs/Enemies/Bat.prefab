@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6959797289386727777}
   - component: {fileID: 6848868073345197053}
   - component: {fileID: 3518101585820033933}
+  - component: {fileID: 6789847718666330716}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -216,3 +217,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyContactDamage
   _data: {fileID: 11400000, guid: af5227191f765094c9d62b34842e666c, type: 2}
+--- !u!210 &6789847718666330716
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266521314020780844}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
