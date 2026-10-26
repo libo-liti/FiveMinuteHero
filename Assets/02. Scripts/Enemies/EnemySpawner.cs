@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FiveMinuteHero.Enemies
@@ -7,12 +8,16 @@ namespace FiveMinuteHero.Enemies
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private Transform _target;
-        [SerializeField] private EnemyMovement[] _enemyPrefabs;
+        [SerializeField] private Enemy[] _enemyPrefabs;
         [SerializeField, Min(0.01f)] private float _spawnInterval = 1f; // 초
         // 원점이 발이라 스프라이트가 위로 약 3유닛 솟는다. 아래쪽에서 나올 때도 안 보이도록 이만큼 띄운다.
         [SerializeField, Min(0f)] private float _spawnMargin = 3f;
 
+        private readonly List<Enemy> _aliveEnemies = new List<Enemy>();
         private float _timer;
+
+        // 무기가 가장 가까운 적을 찾을 때 순회한다. 밖에서는 읽기만 하게 막는다.
+        public IReadOnlyList<Enemy> AliveEnemies => _aliveEnemies;
 
         private void Update()
         {
@@ -28,9 +33,18 @@ namespace FiveMinuteHero.Enemies
 
         private void Spawn()
         {
-            EnemyMovement prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
-            EnemyMovement enemy = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity, transform);
+            Enemy prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
+            Enemy enemy = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity, transform);
             enemy.Init(_target);
+
+            _aliveEnemies.Add(enemy);
+            enemy.Died += OnEnemyDied;
+        }
+
+        private void OnEnemyDied(Enemy enemy)
+        {
+            // 목록에서 빼지 않으면 무기가 파괴된 적을 조준한다.
+            _aliveEnemies.Remove(enemy);
         }
 
         // 화면 사각형을 여유분만큼 키운 테두리 위에서 한 점을 고른다.
