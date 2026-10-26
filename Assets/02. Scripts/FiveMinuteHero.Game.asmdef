@@ -1,5 +1,5 @@
 {
   "name": "FiveMinuteHero.Game",
   "rootNamespace": "FiveMinuteHero",
-  "references": ["Jonghyun.Core.Perf", "Unity.InputSystem"]
+  "references": ["Jonghyun.Core.Perf", "Unity.InputSystem", "UnityEngine.UI", "Unity.TextMeshPro"]
 }

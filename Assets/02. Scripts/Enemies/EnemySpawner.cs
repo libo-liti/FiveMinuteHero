@@ -19,6 +19,10 @@ namespace FiveMinuteHero.Enemies
         // 무기가 가장 가까운 적을 찾을 때 순회한다. 밖에서는 읽기만 하게 막는다.
         public IReadOnlyList<Enemy> AliveEnemies => _aliveEnemies;
 
+        // 젬 드롭 등이 새 적의 Died를 구독할 수 있게 알린다. 스포너는 구독자가 뭘 하는지 모른다.
+        // using System을 쓰면 System.Random과 UnityEngine.Random이 겹쳐서 Action만 전체 이름으로 쓴다.
+        public event System.Action<Enemy> EnemySpawned;
+
         private void Update()
         {
             _timer += Time.deltaTime;
@@ -39,6 +43,7 @@ namespace FiveMinuteHero.Enemies
 
             _aliveEnemies.Add(enemy);
             enemy.Died += OnEnemyDied;
+            EnemySpawned?.Invoke(enemy);
         }
 
         private void OnEnemyDied(Enemy enemy)

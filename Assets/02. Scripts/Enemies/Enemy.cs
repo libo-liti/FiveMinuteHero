@@ -17,6 +17,8 @@ namespace FiveMinuteHero.Enemies
 
         // 원점은 발이라서, 조준은 몸통(콜라이더 중심)을 향하게 한다.
         public Vector2 AimPoint => _hitCollider.bounds.center;
+        // 젬 드롭 쪽이 읽는다. EnemyData 전체를 내주지 않고 필요한 값만 연다.
+        public int ExpReward => _data.ExpReward;
 
         private void Awake()
         {
