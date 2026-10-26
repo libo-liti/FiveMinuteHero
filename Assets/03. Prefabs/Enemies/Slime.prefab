@@ -105,7 +105,9 @@ GameObject:
   - component: {fileID: 7577893301018597926}
   - component: {fileID: 4748999469272751499}
   - component: {fileID: 4079267101981166164}
-  m_Layer: 0
+  - component: {fileID: 8965328681123295679}
+  - component: {fileID: 711410368790973351}
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b843d1fda8d9b14ebe532b4917e5a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyMovement
-  _data: {fileID: 11400000, guid: 1627cbcfcae0e1040a98291dfbfc5a62, type: 2}
 --- !u!114 &4748999469272751499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c899eb3d550e73643b8fcf4d2c390ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyContactDamage
-  _data: {fileID: 11400000, guid: 1627cbcfcae0e1040a98291dfbfc5a62, type: 2}
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!210 &4079267101981166164
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -230,3 +233,32 @@ SortingGroup:
   m_SortingOrder: 1
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &8965328681123295679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937785058895415110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672e32cf252871a42b1cc455ae953cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.Enemy
+  _data: {fileID: 11400000, guid: 1627cbcfcae0e1040a98291dfbfc5a62, type: 2}
+  _movement: {fileID: 7577893301018597926}
+  _contactDamage: {fileID: 4748999469272751499}
+  _health: {fileID: 711410368790973351}
+  _hitCollider: {fileID: 5107718799778040548}
+--- !u!114 &711410368790973351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937785058895415110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ed29da4c4fa3041ad1a6879ab26f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyHealth

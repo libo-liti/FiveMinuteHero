@@ -6,9 +6,8 @@ namespace FiveMinuteHero.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyMovement : MonoBehaviour
     {
-        [SerializeField] private EnemyData _data;
-
         private Rigidbody2D _rigidbody;
+        private EnemyData _data;
         private Transform _target;
 
         private void Awake()
@@ -16,9 +15,10 @@ namespace FiveMinuteHero.Enemies
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        // 스포너가 생성 직후 호출한다. 적이 플레이어를 직접 찾지 않게 해서 의존을 밖에서 넣는다.
-        public void Init(Transform target)
+        // Enemy 루트가 생성 직후 호출한다. 적이 플레이어를 직접 찾지 않게 해서 의존을 밖에서 넣는다.
+        public void Init(EnemyData data, Transform target)
         {
+            _data = data;
             _target = target;
         }
 
