@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 480897057}
   - component: {fileID: 480897058}
   - component: {fileID: 480897059}
+  - component: {fileID: 480897060}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -609,6 +610,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.ActionMoveInput
   _moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!114 &480897060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480897049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da35cba03ccd8b44ea4ef643e010c663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.OrbitBotMoveInput
+  _center: {x: 0, y: 0}
+  _radius: 4
+  _correctionStrength: 1
 --- !u!1 &607975347
 GameObject:
   m_ObjectHideFlags: 0
