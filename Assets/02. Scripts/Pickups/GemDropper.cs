@@ -4,24 +4,24 @@ using UnityEngine;
 
 namespace FiveMinuteHero.Pickups
 {
-    // 적이 죽은 자리에 경험치 젬을 떨어뜨린다. 스포너는 이 컴포넌트를 모르고, 이벤트만 내보낸다.
+    // 적이 죽은 자리에 경험치 젬을 떨어뜨린다.
     public class GemDropper : MonoBehaviour
     {
-        [SerializeField] private EnemySpawner _spawner;
         [SerializeField] private ExpGem _gemPrefab;
         [SerializeField] private PlayerExperience _collector;
+        [SerializeField] private EnemyRegistry _registry;
 
         private void OnEnable()
         {
-            _spawner.EnemySpawned += OnEnemySpawned;
+            _registry.Registered += OnEnemyRegistered;
         }
 
         private void OnDisable()
         {
-            _spawner.EnemySpawned -= OnEnemySpawned;
+            _registry.Registered -= OnEnemyRegistered;
         }
 
-        private void OnEnemySpawned(Enemy enemy)
+        private void OnEnemyRegistered(Enemy enemy)
         {
             // 적이 파괴되면 이 구독도 적과 함께 사라지므로 따로 해제하지 않는다.
             enemy.Died += OnEnemyDied;

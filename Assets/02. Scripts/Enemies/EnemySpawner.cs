@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FiveMinuteHero.Enemies
@@ -12,16 +11,9 @@ namespace FiveMinuteHero.Enemies
         [SerializeField, Min(0.01f)] private float _spawnInterval = 1f; // 초
         // 원점이 발이라 스프라이트가 위로 약 3유닛 솟는다. 아래쪽에서 나올 때도 안 보이도록 이만큼 띄운다.
         [SerializeField, Min(0f)] private float _spawnMargin = 3f;
+        [SerializeField] private EnemyRegistry _registry;
 
-        private readonly List<Enemy> _aliveEnemies = new List<Enemy>();
         private float _timer;
-
-        // 무기가 가장 가까운 적을 찾을 때 순회한다. 밖에서는 읽기만 하게 막는다.
-        public IReadOnlyList<Enemy> AliveEnemies => _aliveEnemies;
-
-        // 젬 드롭 등이 새 적의 Died를 구독할 수 있게 알린다. 스포너는 구독자가 뭘 하는지 모른다.
-        // using System을 쓰면 System.Random과 UnityEngine.Random이 겹쳐서 Action만 전체 이름으로 쓴다.
-        public event System.Action<Enemy> EnemySpawned;
 
         private void Update()
         {
@@ -41,15 +33,7 @@ namespace FiveMinuteHero.Enemies
             Enemy enemy = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity, transform);
             enemy.Init(_target);
 
-            _aliveEnemies.Add(enemy);
-            enemy.Died += OnEnemyDied;
-            EnemySpawned?.Invoke(enemy);
-        }
-
-        private void OnEnemyDied(Enemy enemy)
-        {
-            // 목록에서 빼지 않으면 무기가 파괴된 적을 조준한다.
-            _aliveEnemies.Remove(enemy);
+            _registry.Register(enemy);
         }
 
         // 화면 사각형을 여유분만큼 키운 테두리 위에서 한 점을 고른다.

@@ -12,7 +12,7 @@ namespace FiveMinuteHero.Enemies
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private Collider2D _hitCollider;
 
-        // 스포너(생존 목록), 나중엔 점수·경험치 등이 구독한다. 어떤 적이 죽었는지 함께 넘긴다.
+        // 점수·경험치 등이 구독한다. 어떤 적이 죽었는지 함께 넘긴다.
         public event Action<Enemy> Died;
 
         // 원점은 발이라서, 조준은 몸통(콜라이더 중심)을 향하게 한다.

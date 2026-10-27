@@ -7,8 +7,8 @@ namespace FiveMinuteHero.Weapons
     // 쿨타임마다 사거리 안에서 가장 가까운 적에게 마법탄을 쏜다.
     public class MagicBoltWeapon : MonoBehaviour
     {
+        [SerializeField] private EnemyRegistry _registry;
         [SerializeField] private WeaponData _data;
-        [SerializeField] private EnemySpawner _spawner;
         // 루트 원점이 발이라서, 몸 높이에 둔 자식 Transform에서 쏜다.
         [SerializeField] private Transform _firePoint;
 
@@ -42,7 +42,7 @@ namespace FiveMinuteHero.Weapons
             float nearestSqrDistance = _data.Range * _data.Range;
             Enemy nearest = null;
 
-            IReadOnlyList<Enemy> enemies = _spawner.AliveEnemies;
+            IReadOnlyList<Enemy> enemies = _registry.AliveEnemies;
             for (int i = 0; i < enemies.Count; i++)
             {
                 float sqrDistance = (enemies[i].AimPoint - origin).sqrMagnitude;

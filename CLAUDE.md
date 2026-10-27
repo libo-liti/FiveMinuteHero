@@ -16,6 +16,14 @@ Unity 6000.3 LTS · URP 2D · Android(세로 고정) · Input System 전용.
 - git 커밋·푸시·브랜치 작업은 하지 않는다. 사용자가 GitKraken으로 직접 한다.
 - 설명과 주석은 한국어로 쓴다.
 
+## 사용자 직접 작성 모드
+사용자가 "직접 짤게"라고 하거나 작업이 아래 대상 목록에 있으면 이 모드로 진행한다. 목적은 사용자가 면접에서 핵심 코드를 백지에서 다시 짤 수 있게 되는 것이다.
+- 정답 코드를 쓰지 않는다. 설계(클래스 이름, 책임, public 메서드 시그니처, 이벤트)는 함께 정하고 구현은 사용자가 한다.
+- 막히면 힌트는 단계별로, 사용자가 요청한 단계까지만 준다: 1) 방향(어떤 개념·API를 쓰면 되는지) → 2) 의사코드 → 3) 막힌 그 줄만.
+- 사용자가 다 짜면 리뷰한다. 순서: 버그 → CLAUDE.md 규칙 위반 → 더 나은 구조. 지적마다 "왜"를 붙이고, 고치는 것은 사용자가 직접 한다. 사용자가 명시적으로 부탁할 때만 직접 수정한다.
+- 코드가 덜 깔끔한 것은 괜찮다. 동작과 규칙이 맞으면 통과시키고, 구조 개선은 "다음에 해 볼 것"으로 1~2개만 제안한다.
+- 대상 목록 (사용자와 함께 갱신): EnemyRegistry 분리, IMoveInput 분리 + 자동 봇 원 궤도 이동.
+
 ## 구조
 ```
 Assets/
@@ -26,7 +34,7 @@ Packages/com.jonghyun.core/        공통 모듈 임베디드 패키지
   package.json
   Runtime/<Module>/Jonghyun.Core.<Module>.asmdef
 ```
-- 현재 asmdef: `Jonghyun.Core.Perf`(참조 없음), `FiveMinuteHero.Game`(→ Core.Perf, Unity.InputSystem).
+- 현재 asmdef: `Jonghyun.Core.Perf`(참조 없음), `FiveMinuteHero.Game`(→ Core.Perf, Unity.InputSystem, UnityEngine.UI, Unity.TextMeshPro).
 - 모듈(Core.Save, Core.Ads, Core.Analytics, Core.Assets, Core.Pool)은 **실제로 쓸 때** 하나씩 추가한다. 미리 만들지 않는다.
 - 네임스페이스: 게임은 `FiveMinuteHero.<영역>`, 모듈은 `Jonghyun.Core.<Module>`.
 
@@ -61,4 +69,5 @@ Packages/com.jonghyun.core/        공통 모듈 임베디드 패키지
 ## 커밋·PR 형식
 - 브랜치: `feat/` `fix/` `perf/` `refactor/` `chore/` `docs/` + 짧은 영어 이름 (예: `feat/player-movement`)
 - 커밋: `feat: 가상 조이스틱 이동` 처럼 머리말 + 한국어 요약
-- PR 본문: `## 변경 내용` / `## 왜` / `## 확인` 세 칸. 최적화 PR은 `## 확인`에 Before/After 표.
+- PR 본문: `## 내 말로 설명` / `## 변경 내용` / `## 왜` / `## 확인` 네 칸. 최적화 PR은 `## 확인`에 Before/After 표.
+- `## 내 말로 설명`(3줄: 이 PR이 하는 일 / 핵심 흐름 / 내가 고른 선택과 이유)은 사용자가 직접 쓴다. 초안을 대신 쓰지 말고 빈칸으로 둔다.
