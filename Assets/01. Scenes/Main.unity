@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 480897056}
   - component: {fileID: 480897057}
   - component: {fileID: 480897058}
+  - component: {fileID: 480897059}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -457,8 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883f8e15e98e3d0488e967a795f14459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerMovement
-  _moveAction: {fileID: -1246895598473198080, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
+  _inputSource: {fileID: 480897059}
 --- !u!58 &480897051
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -578,10 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3a8207e18a31144aa44a8adcdb6db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Weapons.MagicBoltWeapon
-  _data: {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
-  _spawner: {fileID: 689824801}
-  _firePoint: {fileID: 2023506696}
   _registry: {fileID: 689824803}
+  _data: {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
+  _firePoint: {fileID: 2023506696}
 --- !u!114 &480897058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +596,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerExperience
   _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
   _levelTable: {fileID: 11400000, guid: 714b7c9b95c7f704ba7f746a51b052ca, type: 2}
+--- !u!114 &480897059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480897049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f5526ab9230c5419b5ca03c7b64bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.ActionMoveInput
+  _moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &607975347
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b1334eb32cbcc42935e371e83454b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Pickups.GemDropper
-  _spawner: {fileID: 689824801}
   _gemPrefab: {fileID: 7644656497273395974, guid: 0188e935661c0874a95a5c13fe70bbf7, type: 3}
   _collector: {fileID: 480897058}
   _registry: {fileID: 689824803}
@@ -709,7 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70cacaa9bf4a8d94db762d6bbaa4ffb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyRegistry
-  Count: 0
 --- !u!1 &727955474
 GameObject:
   m_ObjectHideFlags: 0
