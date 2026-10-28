@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace FiveMinuteHero.Enemies
 {
-    // 일정 간격으로 카메라 화면 바로 바깥에 적을 만들고, 추적 대상을 주입한다.
+    // 카메라 화면 바로 바깥에 적을 만들고, 추적 대상을 주입한다.
+    // 평소엔 일정 간격으로 만들고, 유지 모드에선 살아 있는 수가 목표에 못 미치는 만큼 채운다(벤치마크용).
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
@@ -14,9 +15,24 @@ namespace FiveMinuteHero.Enemies
         [SerializeField] private EnemyRegistry _registry;
 
         private float _timer;
+        private int _maintainCount;     // 0이면 주기 스폰 모드
+        private int _maxSpawnPerFrame;
+
+        // count > 0이면 그 수를 유지한다. 1000마리를 한 프레임에 만들면 스파이크가 생기므로 프레임당 최대 maxSpawnPerFrame마리만 채운다.
+        public void SetMaintainCount(int count, int maxSpawnPerFrame)
+        {
+            _maintainCount = Mathf.Max(count, 0);
+            _maxSpawnPerFrame = Mathf.Max(maxSpawnPerFrame, 1);
+        }
 
         private void Update()
         {
+            if (_maintainCount > 0)
+            {
+                FillToMaintainCount();
+                return;
+            }
+
             _timer += Time.deltaTime;
             if (_timer < _spawnInterval)
             {
@@ -34,6 +50,16 @@ namespace FiveMinuteHero.Enemies
             enemy.Init(_target);
 
             _registry.Register(enemy);
+        }
+
+        private void FillToMaintainCount()
+        {
+            // 무기에 죽은 만큼 다음 프레임부터 다시 채워져서, 살아 있는 수가 목표 근처에 머문다.
+            int toSpawn = Mathf.Min(_maintainCount - _registry.Count, _maxSpawnPerFrame);
+            for (int i = 0; i < toSpawn; i++)
+            {
+                Spawn();
+            }
         }
 
         // 화면 사각형을 여유분만큼 키운 테두리 위에서 한 점을 고른다.

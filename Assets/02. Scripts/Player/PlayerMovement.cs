@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace FiveMinuteHero.Player
 {
-    // IMoveInput에서 방향을 받아 Rigidbody2D 속도로 플레이어를 움직인다. 입력이 키보드인지 봇인지는 모른다.
+    // IMoveInput에서 방향을 받아 Kinematic Rigidbody2D를 MovePosition으로 움직인다. 입력이 키보드인지 봇인지는 모른다.
+    // Dynamic이면 적 무리가 밀어붙일 때 갇혀서 못 움직였다. Kinematic은 적에게 밀리지 않고, 적 쪽이 밀려난다.
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
@@ -33,9 +34,9 @@ namespace FiveMinuteHero.Player
 
         private void OnDisable()
         {
-            // 사망 시 PlayerHealth가 이 컴포넌트를 끈다. 속도를 지우지 않으면 마지막 속도로 계속 미끄러진다.
+            // 사망 시 PlayerHealth가 이 컴포넌트를 끈다. Kinematic은 남는 속도가 없어서 MovePosition만 멈추면 제자리에 선다.
+            // 다시 켜졌을 때 이전 입력으로 한 스텝 움직이지 않도록 방향만 지운다.
             _direction = Vector2.zero;
-            _rigidbody.linearVelocity = Vector2.zero;
         }
 
         private void Update()
@@ -47,8 +48,9 @@ namespace FiveMinuteHero.Player
 
         private void FixedUpdate()
         {
-            // 물리 갱신 주기에 맞춰 속도를 넣는다. 위치 계산과 충돌은 물리 엔진이 처리한다.
-            _rigidbody.linearVelocity = _direction * _stats.MoveSpeed;
+            // 물리 스텝마다 "이번 스텝에 갈 거리 = 방향 × 초당 속도 × 스텝 시간"만큼 옮긴다.
+            // transform을 직접 바꾸지 않고 MovePosition을 써야 물리 엔진이 이동으로 인식해 충돌·보간이 맞게 처리된다.
+            _rigidbody.MovePosition(_rigidbody.position + _direction * (_stats.MoveSpeed * Time.fixedDeltaTime));
         }
     }
 }

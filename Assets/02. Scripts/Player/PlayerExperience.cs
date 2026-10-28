@@ -37,7 +37,6 @@ namespace FiveMinuteHero.Player
             {
                 _currentExp -= RequiredExp; // 넘친 경험치는 다음 레벨로 이월
                 _level++;
-                Debug.Log($"[PlayerExperience] 레벨업 → Lv.{_level}");
                 LeveledUp?.Invoke(_level);
             }
 
