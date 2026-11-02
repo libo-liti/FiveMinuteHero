@@ -1500,7 +1500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883f8e15e98e3d0488e967a795f14459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerMovement
-  _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
   _inputSource: {fileID: 480897060}
 --- !u!58 &480897051
 CircleCollider2D:
@@ -1594,7 +1593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fea0f57e7f7ec5429b0ca54a4c958f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerHealth
-  _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
   _movement: {fileID: 480897050}
 --- !u!210 &480897056
 SortingGroup:
@@ -1622,7 +1620,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Weapons.MagicBoltWeapon
   _registry: {fileID: 689824803}
-  _data: {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
   _firePoint: {fileID: 2023506696}
 --- !u!114 &480897058
 MonoBehaviour:
@@ -1636,7 +1633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae12a1a3a599a64494389c85068fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerExperience
-  _stats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
   _levelTable: {fileID: 11400000, guid: 714b7c9b95c7f704ba7f746a51b052ca, type: 2}
 --- !u!114 &480897059
 MonoBehaviour:
@@ -3026,6 +3022,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1011655492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011655494}
+  - component: {fileID: 1011655493}
+  m_Layer: 0
+  m_Name: Bootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1011655493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011655492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aadf35ddeb32a94bb83ddb4798b6ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Flow.Bootstrap
+  _playerStats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
+  _magicBoltData: {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
+  _playerMovement: {fileID: 480897050}
+  _playerHealth: {fileID: 480897055}
+  _playerExperience: {fileID: 480897058}
+  _magicBolt: {fileID: 480897057}
+--- !u!4 &1011655494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011655492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1013289614
 GameObject:
   m_ObjectHideFlags: 0
@@ -4025,6 +4071,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1011655494}
   - {fileID: 1414159032}
   - {fileID: 1101351236}
   - {fileID: 235339862}

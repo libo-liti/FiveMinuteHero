@@ -7,9 +7,9 @@ namespace FiveMinuteHero.Player
     // 플레이어 체력. 피격 후 무적 시간 동안은 피해를 무시하고, 체력 변화와 사망을 이벤트로 알린다.
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        [SerializeField] private PlayerStats _stats;
         [SerializeField] private PlayerMovement _movement;
 
+        private PlayerRuntimeStats _stats;
         private int _currentHealth;
         private float _invincibleUntil; // 이 시각(Time.time)까지는 무적
         private bool _isInvincible;     // 벤치마크처럼 죽으면 안 되는 상황에서 켠다
@@ -21,9 +21,19 @@ namespace FiveMinuteHero.Player
 
         public bool IsDead => _currentHealth <= 0;
 
-        private void Awake()
+        // Bootstrap이 호출한다. 시작 체력은 주입받은 스탯으로 정하므로 Awake가 아니라 여기서 채운다.
+        public void Init(PlayerRuntimeStats stats)
         {
+            _stats = stats;
             _currentHealth = _stats.MaxHealth;
+        }
+
+        private void Start()
+        {
+            if (_stats == null)
+            {
+                Debug.LogError("PlayerHealth: Init을 받지 못했습니다. 씬의 Bootstrap 연결을 확인하세요.", this);
+            }
         }
 
         // 측정 중에 죽으면 GameSession이 게임을 멈춰 측정이 망가진다. 그래서 측정하는 쪽이 무적을 켠다.
@@ -46,7 +56,7 @@ namespace FiveMinuteHero.Player
 
             if (IsDead)
             {
-                // 이동을 끈다. Kinematic이라 남는 속도가 없어 그 자리에 멈춘다.
+                // 이동을 끈다. 남은 속도는 PlayerMovement.OnDisable이 지워서 그 자리에 멈춘다.
                 _movement.enabled = false;
                 Died?.Invoke();
             }
