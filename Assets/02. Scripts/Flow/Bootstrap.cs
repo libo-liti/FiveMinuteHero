@@ -1,4 +1,5 @@
 using FiveMinuteHero.Player;
+using FiveMinuteHero.Upgrades;
 using FiveMinuteHero.Weapons;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace FiveMinuteHero.Flow
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private PlayerExperience _playerExperience;
         [SerializeField] private MagicBoltWeapon _magicBolt;
+        [SerializeField] private GameSession _gameSession;
+        [SerializeField] private LevelUpController _levelUpController;
 
         private void Awake()
         {
@@ -32,6 +35,16 @@ namespace FiveMinuteHero.Flow
             _playerHealth.Init(playerStats);
             _playerExperience.Init(playerStats);
             _magicBolt.Init(magicBoltStats);
+
+            // 강화가 바꿀 대상을 모은다. 무기가 늘면 가진 무기마다 RegisterWeapon을 부른다.
+            UpgradeContext context = new UpgradeContext(playerStats);
+            context.RegisterWeapon(_magicBoltData, magicBoltStats);
+
+            // Benchmark 씬에는 레벨업이 없어서 비워 둔다. GameSession은 IPauseService로 넘겨 컨트롤러가 Restart 등을 모르게 한다.
+            if (_levelUpController != null)
+            {
+                _levelUpController.Init(context, _gameSession);
+            }
         }
     }
 }
