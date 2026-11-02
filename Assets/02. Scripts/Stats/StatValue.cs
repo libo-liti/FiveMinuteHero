@@ -29,5 +29,22 @@ namespace FiveMinuteHero.Stats
         {
             _percentBonus += amount;
         }
+
+        // 강화 데이터가 고른 방식대로 더한다. 런타임 스탯마다 "Flat이면 AddFlat, 아니면 AddPercent"를 반복하지 않으려고 둔다.
+        public void Add(StatModifierType type, float amount)
+        {
+            switch (type)
+            {
+                case StatModifierType.Flat:
+                    AddFlat(amount);
+                    break;
+                case StatModifierType.Percent:
+                    AddPercent(amount);
+                    break;
+                default:
+                    Debug.LogError($"StatValue: 처리하지 않는 보너스 방식입니다: {type}");
+                    break;
+            }
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace FiveMinuteHero.Player
         {
             _stats = stats;
             _currentHealth = _stats.MaxHealth;
+            // 해제는 하지 않는다. 스탯 객체와 이 컴포넌트는 같은 씬에서 함께 생기고 함께 사라진다.
+            _stats.MaxHealthChanged += OnMaxHealthChanged;
         }
 
         private void Start()
@@ -60,6 +62,19 @@ namespace FiveMinuteHero.Player
                 _movement.enabled = false;
                 Died?.Invoke();
             }
+        }
+
+        // 최대 체력 강화를 고르면 늘어난 만큼 현재 체력도 채운다. 줄어든 경우에도 새 최대치를 넘지 않게 자른다.
+        private void OnMaxHealthChanged(int oldMax, int newMax)
+        {
+            // 죽은 뒤에 체력이 올라 되살아나지 않게 한다.
+            if (IsDead)
+            {
+                return;
+            }
+
+            _currentHealth = Mathf.Min(_currentHealth + (newMax - oldMax), newMax);
+            HealthChanged?.Invoke(_currentHealth, newMax);
         }
     }
 }

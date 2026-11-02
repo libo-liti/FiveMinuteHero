@@ -33,5 +33,28 @@ namespace FiveMinuteHero.Weapons
         public float ProjectileSpeed => _projectileSpeed.Value;
         public float Range => _range.Value;
         public Projectile ProjectilePrefab => _projectilePrefab;
+
+        // 강화 하나를 이 객체에 쌓는다. 무기는 발사할 때마다 값을 다시 읽으므로 이벤트로 알리지 않는다.
+        public void AddBonus(WeaponStatType stat, StatModifierType type, float amount)
+        {
+            switch (stat)
+            {
+                case WeaponStatType.Damage:
+                    _damage.Add(type, amount);
+                    break;
+                case WeaponStatType.Cooldown:
+                    _cooldown.Add(type, amount);
+                    break;
+                case WeaponStatType.ProjectileSpeed:
+                    _projectileSpeed.Add(type, amount);
+                    break;
+                case WeaponStatType.Range:
+                    _range.Add(type, amount);
+                    break;
+                default:
+                    Debug.LogError($"WeaponRuntimeStats: 처리하지 않는 스탯입니다: {stat}");
+                    break;
+            }
+        }
     }
 }
