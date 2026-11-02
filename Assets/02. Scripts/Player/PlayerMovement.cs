@@ -8,13 +8,13 @@ namespace FiveMinuteHero.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private PlayerStats _stats;
         // Unity는 인터페이스 타입 필드를 직렬화하지 못해서 MonoBehaviour로 받고, Awake에서 IMoveInput으로 바꾼다.
         [SerializeField] private MonoBehaviour _inputSource;
 
         private Rigidbody2D _rigidbody;
         private IMoveInput _moveInput;
         private Vector2 _direction;
+        private PlayerRuntimeStats _stats;
 
         // 애니메이션 등에서 이동 방향을 읽을 때 쓴다.
         public Vector2 MoveDirection => _direction;
@@ -29,6 +29,22 @@ namespace FiveMinuteHero.Player
             {
                 Debug.LogError("PlayerMovement: _inputSource에 IMoveInput을 구현한 컴포넌트를 연결하세요.", this);
                 // 꺼 두면 Update가 돌지 않아 매 프레임 NullReference가 나지 않는다.
+                enabled = false;
+            }
+        }
+
+        // Bootstrap이 호출한다. Awake보다 먼저 올 수 있어서 _rigidbody 같은 Awake 캐싱 필드는 쓰지 않는다.
+        public void Init(PlayerRuntimeStats stats)
+        {
+            _stats = stats;
+        }
+
+        private void Start()
+        {
+            if (_stats == null)
+            {
+                Debug.LogError("PlayerMovement: Init을 받지 못했습니다. 씬의 Bootstrap 연결을 확인하세요.", this);
+                // 꺼 두면 FixedUpdate가 돌지 않아 매 스텝 NullReference가 나지 않는다.
                 enabled = false;
             }
         }

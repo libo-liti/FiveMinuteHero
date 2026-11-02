@@ -8,16 +8,32 @@ namespace FiveMinuteHero.Weapons
     public class MagicBoltWeapon : MonoBehaviour
     {
         [SerializeField] private EnemyRegistry _registry;
-        [SerializeField] private WeaponData _data;
         // 루트 원점이 발이라서, 몸 높이에 둔 자식 Transform에서 쏜다.
         [SerializeField] private Transform _firePoint;
 
+        private WeaponRuntimeStats _stats;
         private float _timer;
+
+        // Bootstrap이 호출한다.
+        public void Init(WeaponRuntimeStats stats)
+        {
+            _stats = stats;
+        }
+
+        private void Start()
+        {
+            if (_stats == null)
+            {
+                Debug.LogError("MagicBoltWeapon: Init을 받지 못했습니다. 씬의 Bootstrap 연결을 확인하세요.", this);
+                // 꺼 두면 Update가 돌지 않아 매 프레임 NullReference가 나지 않는다.
+                enabled = false;
+            }
+        }
 
         private void Update()
         {
             _timer += Time.deltaTime;
-            if (_timer < _data.Cooldown)
+            if (_timer < _stats.Cooldown)
             {
                 return;
             }
@@ -26,11 +42,11 @@ namespace FiveMinuteHero.Weapons
             if (target == null)
             {
                 // 쿨타임이 찬 채로 기다리다가, 적이 사거리에 들어오는 즉시 쏜다.
-                _timer = _data.Cooldown;
+                _timer = _stats.Cooldown;
                 return;
             }
 
-            _timer -= _data.Cooldown;
+            _timer -= _stats.Cooldown;
             Fire(target);
         }
 
@@ -39,7 +55,7 @@ namespace FiveMinuteHero.Weapons
         {
             Vector2 origin = _firePoint.position;
             // 제곱 거리로 비교해서 매번 제곱근을 계산하지 않는다.
-            float nearestSqrDistance = _data.Range * _data.Range;
+            float nearestSqrDistance = _stats.Range * _stats.Range;
             Enemy nearest = null;
 
             IReadOnlyList<Enemy> enemies = _registry.AliveEnemies;
@@ -62,9 +78,9 @@ namespace FiveMinuteHero.Weapons
             Vector2 direction = (target.AimPoint - origin).normalized;
 
             // 플레이어를 따라 움직이지 않도록 부모 없이 만든다.
-            Projectile projectile = Instantiate(_data.ProjectilePrefab, origin, Quaternion.identity);
+            Projectile projectile = Instantiate(_stats.ProjectilePrefab, origin, Quaternion.identity);
             // 사거리만큼 날아가면 사라지도록 수명 = 거리 / 속도.
-            projectile.Launch(direction, _data.ProjectileSpeed, _data.Damage, _data.Range / _data.ProjectileSpeed);
+            projectile.Launch(direction, _stats.ProjectileSpeed, _stats.Damage, _stats.Range / _stats.ProjectileSpeed);
         }
     }
 }

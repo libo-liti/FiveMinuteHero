@@ -6,9 +6,9 @@ namespace FiveMinuteHero.Player
     // 플레이어 경험치와 레벨. 젬이 AddExp로 넣어 주고, 변화는 이벤트로 알린다.
     public class PlayerExperience : MonoBehaviour
     {
-        [SerializeField] private PlayerStats _stats;
         [SerializeField] private LevelTable _levelTable;
 
+        private PlayerRuntimeStats _stats;
         private int _level = 1;
         private int _currentExp; // 현재 레벨 안에서 쌓인 경험치. 레벨업하면 필요량만큼 빠진다.
 
@@ -20,8 +20,22 @@ namespace FiveMinuteHero.Player
         public int Level => _level;
         public int CurrentExp => _currentExp;
         public int RequiredExp => _levelTable.GetRequiredExp(_level);
-        // 젬이 끌려오기 시작할 거리. 젬은 PlayerStats를 몰라도 되게 여기서 넘겨준다.
+        // 젬이 끌려오기 시작할 거리. 젬은 런타임 스탯을 몰라도 되게 여기서 넘겨준다.
         public float PickupRange => _stats.PickupRange;
+
+        // Bootstrap이 호출한다.
+        public void Init(PlayerRuntimeStats stats)
+        {
+            _stats = stats;
+        }
+
+        private void Start()
+        {
+            if (_stats == null)
+            {
+                Debug.LogError("PlayerExperience: Init을 받지 못했습니다. 씬의 Bootstrap 연결을 확인하세요.", this);
+            }
+        }
 
         public void AddExp(int amount)
         {
