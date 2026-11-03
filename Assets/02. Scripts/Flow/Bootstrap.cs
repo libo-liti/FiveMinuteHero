@@ -1,3 +1,4 @@
+using FiveMinuteHero.Enemies;
 using FiveMinuteHero.Player;
 using FiveMinuteHero.Upgrades;
 using FiveMinuteHero.Weapons;
@@ -17,28 +18,35 @@ namespace FiveMinuteHero.Flow
     public class Bootstrap : MonoBehaviour
     {
         [SerializeField] private PlayerStats _playerStats;
-        [SerializeField] private WeaponData _magicBoltData;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private PlayerExperience _playerExperience;
-        [SerializeField] private MagicBoltWeapon _magicBolt;
         [SerializeField] private GameSession _gameSession;
         [SerializeField] private LevelUpController _levelUpController;
+
+        // 판을 시작할 때 가진 무기. 씬마다 다르게 둘 수 있다(Benchmark는 측정 조건 때문에 마법탄만).
+        [SerializeField] private WeaponData[] _startingWeapons;
+        [SerializeField] private Transform _weaponMount;       // 무기를 붙일 플레이어 자식(몸 높이)
+        [SerializeField] private EnemyRegistry _enemyRegistry; // 무기가 적을 찾을 때 쓴다. 프리팹 무기도 받을 수 있게 Init으로 넘긴다
 
         private void Awake()
         {
             // 이동·체력·경험치가 같은 객체를 받아야 강화 하나가 세 곳에 함께 반영된다.
             PlayerRuntimeStats playerStats = new PlayerRuntimeStats(_playerStats);
-            WeaponRuntimeStats magicBoltStats = new WeaponRuntimeStats(_magicBoltData);
 
             _playerMovement.Init(playerStats);
             _playerHealth.Init(playerStats);
             _playerExperience.Init(playerStats);
-            _magicBolt.Init(magicBoltStats);
 
-            // 강화가 바꿀 대상을 모은다. 무기가 늘면 가진 무기마다 RegisterWeapon을 부른다.
-            UpgradeContext context = new UpgradeContext(playerStats);
-            context.RegisterWeapon(_magicBoltData, magicBoltStats);
+            // 가진 무기 목록. 시작 무기도 판 중간 획득과 같은 Add 경로로 만든다.
+            WeaponInventory weapons = new WeaponInventory(_weaponMount, _enemyRegistry);
+            foreach (WeaponData weapon in _startingWeapons)
+            {
+                weapons.Add(weapon);
+            }
+
+            // 강화가 바꿀 대상을 모은다.
+            UpgradeContext context = new UpgradeContext(playerStats, weapons);
 
             // Benchmark 씬에는 레벨업이 없어서 비워 둔다. GameSession은 IPauseService로 넘겨 컨트롤러가 Restart 등을 모르게 한다.
             if (_levelUpController != null)

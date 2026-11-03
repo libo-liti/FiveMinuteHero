@@ -18,7 +18,7 @@ namespace FiveMinuteHero.Upgrades
         // 무기가 늘어도 후보 뽑기 코드는 그대로 두고, 이 판단만으로 안 가진 무기의 강화를 거른다.
         public override bool CanApply(UpgradeContext context)
         {
-            return context.GetWeapon(_weapon) != null;
+            return context.Weapons.Has(_weapon);
         }
 
         public override string GetDescription(int level)
@@ -29,7 +29,7 @@ namespace FiveMinuteHero.Upgrades
 
         public override void Apply(UpgradeContext context, int level)
         {
-            WeaponRuntimeStats weaponStats = context.GetWeapon(_weapon);
+            WeaponRuntimeStats weaponStats = context.Weapons.GetStats(_weapon);
             // CanApply로 이미 걸렀으므로 여기서 null이면 호출 순서가 잘못된 것이다. 조용히 넘기지 않고 알린다.
             if (weaponStats == null)
             {
