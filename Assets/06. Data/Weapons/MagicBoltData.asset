@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MagicBoltData
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Weapons.WeaponData
   _damage: 5
+  _weaponPrefab: {fileID: 697253520595676161, guid: 4b8cad2d3a6ce224394a7be171fddc36, type: 3}
   _cooldown: 1
   _projectileSpeed: 8
   _range: 6
-  _projectilePrefab: {fileID: 2816955198978525203, guid: 29efd5560aa2bb840a99021c9806b542, type: 3}

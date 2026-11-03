@@ -1477,7 +1477,6 @@ GameObject:
   - component: {fileID: 480897050}
   - component: {fileID: 480897055}
   - component: {fileID: 480897056}
-  - component: {fileID: 480897057}
   - component: {fileID: 480897058}
   - component: {fileID: 480897059}
   - component: {fileID: 480897060}
@@ -1607,20 +1606,6 @@ SortingGroup:
   m_SortingOrder: 1
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
---- !u!114 &480897057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 480897049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b3a8207e18a31144aa44a8adcdb6db8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Weapons.MagicBoltWeapon
-  _registry: {fileID: 689824803}
-  _firePoint: {fileID: 2023506696}
 --- !u!114 &480897058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3052,11 +3037,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Flow.Bootstrap
   _playerStats: {fileID: 11400000, guid: c770bddc3cac89249a7f327625771d7f, type: 2}
-  _magicBoltData: {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
   _playerMovement: {fileID: 480897050}
   _playerHealth: {fileID: 480897055}
   _playerExperience: {fileID: 480897058}
-  _magicBolt: {fileID: 480897057}
+  _gameSession: {fileID: 0}
+  _levelUpController: {fileID: 0}
+  _startingWeapons:
+  - {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
+  _weaponMount: {fileID: 2023506696}
+  _enemyRegistry: {fileID: 689824803}
 --- !u!4 &1011655494
 Transform:
   m_ObjectHideFlags: 0
@@ -4046,7 +4035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023506696}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: WeaponMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
