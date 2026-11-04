@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FiveMinuteHero.Stats;
 using UnityEngine;
@@ -15,6 +16,10 @@ namespace FiveMinuteHero.Weapons
 
         // 피해량은 모든 무기에 있고 정수라서 따로 꺼내 둔다. % 보너스로 생긴 소수는 반올림한다.
         public int Damage => Mathf.RoundToInt(Get(WeaponStatType.Damage));
+
+        // 강화로 스탯 값이 바뀐 뒤 알린다. 어떤 스탯인지 넘겨서 듣는 쪽이 자기와 상관있는 변경만 처리하게 한다.
+        // 값을 쓸 때마다 다시 읽는 무기(마법탄)는 구독하지 않아도 된다. 오브처럼 값이 바뀌면 오브젝트를 다시 만들어야 하는 무기가 듣는다.
+        public event Action<WeaponStatType> Changed;
 
         // 이 무기가 가질 스탯 하나를 등록한다. WeaponData.CreateRuntimeStats 안에서, Lock 전에만 부른다.
         // 같은 스탯을 두 번 넣으면 Add가 예외를 던져 실수를 바로 알 수 있다.
@@ -48,7 +53,7 @@ namespace FiveMinuteHero.Weapons
             return value.Value;
         }
 
-        // 강화 하나를 이 객체에 쌓는다. 무기는 발사할 때마다 값을 다시 읽으므로 이벤트로 알리지 않는다.
+        // 강화 하나를 이 객체에 쌓고 Changed로 알린다.
         public void AddBonus(WeaponStatType stat, StatModifierType type, float amount)
         {
             // 예: 오브 무기에 투사체 속도 강화를 연결한 에셋. switch의 default 대신 사전에 있는지로 거른다.
@@ -59,6 +64,8 @@ namespace FiveMinuteHero.Weapons
             }
 
             value.Add(type, amount);
+            // 값을 더한 뒤에 알려야 듣는 쪽이 Get으로 새 값을 읽는다.
+            Changed?.Invoke(stat);
         }
     }
 }
