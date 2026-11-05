@@ -25,6 +25,13 @@ namespace FiveMinuteHero.Weapons
         // 무기 종류는 몰라도 된다. 무엇을 만들지는 data가, 어떻게 싸울지는 프리팹의 Weapon 하위 클래스가 정한다.
         public void Add(WeaponData data)
         {
+            // Has의 ContainsKey는 null 키에 예외를 던지므로 가장 먼저 거른다. 빈 칸 하나가 Bootstrap.Awake 전체를 멈추면 안 된다.
+            if (data == null)
+            {
+                Debug.LogError("WeaponInventory: 추가할 무기 데이터가 비어 있습니다. 시작 무기 목록이나 강화 에셋의 빈 칸을 확인하세요.");
+                return;
+            }
+
             if (Has(data))
             {
                 Debug.LogError($"WeaponInventory: 이미 가진 무기입니다: {data.name}", data);
