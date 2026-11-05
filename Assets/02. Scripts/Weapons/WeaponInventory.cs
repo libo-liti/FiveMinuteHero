@@ -25,7 +25,7 @@ namespace FiveMinuteHero.Weapons
         // 무기 종류는 몰라도 된다. 무엇을 만들지는 data가, 어떻게 싸울지는 프리팹의 Weapon 하위 클래스가 정한다.
         public void Add(WeaponData data)
         {
-            // Has의 ContainsKey는 null 키에 예외를 던지므로 가장 먼저 거른다. 빈 칸 하나가 Bootstrap.Awake 전체를 멈추면 안 된다.
+            // 아래 검사들이 data의 이름과 프리팹을 읽으므로 가장 먼저 거른다. 빈 칸 하나가 Bootstrap.Awake 전체를 멈추면 안 된다.
             if (data == null)
             {
                 Debug.LogError("WeaponInventory: 추가할 무기 데이터가 비어 있습니다. 시작 무기 목록이나 강화 에셋의 빈 칸을 확인하세요.");
@@ -53,6 +53,13 @@ namespace FiveMinuteHero.Weapons
 
         public bool Has(WeaponData data)
         {
+            // ContainsKey는 null 키에 예외를 던진다. 강화 후보 검사는 정지 요청 뒤에 돌기 때문에, 예외가 나면 게임이 멈춘 채로 남는다.
+            if (data == null)
+            {
+                Debug.LogError("WeaponInventory: 확인할 무기 데이터가 비어 있습니다. 강화 에셋의 무기 칸을 확인하세요.");
+                return false;
+            }
+
             return _weapons.ContainsKey(data);
         }
 

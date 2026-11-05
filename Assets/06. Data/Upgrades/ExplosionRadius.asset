@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd642dd01212ecd40aff58a49a46ab8d, type: 3}
+  m_Name: ExplosionRadius
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Upgrades.WeaponStatUpgrade
+  _displayName: "\uD3ED\uBC1C \uBC94\uC704"
+  _descriptionFormat: "\uD3ED\uBC1C \uBC94\uC704 +{0}%"
+  _icon: {fileID: 0}
+  _valuesPerLevel:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  _weapon: {fileID: 11400000, guid: 643edf8f2c54abf4d9c0697837d43020, type: 2}
+  _stat: 8
+  _modifierType: 1

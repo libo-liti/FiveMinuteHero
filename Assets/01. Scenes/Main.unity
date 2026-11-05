@@ -4162,6 +4162,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc7311af5b55f2b479310dc5188911b2, type: 2}
   - {fileID: 11400000, guid: a38dd631bcfcf6040ba14195b154fdce, type: 2}
   - {fileID: 11400000, guid: ac6a05f392c48694c9ea58dd308390cb, type: 2}
+  - {fileID: 11400000, guid: 6192d8e628ae64a4cb138bd7628dc59f, type: 2}
+  - {fileID: 11400000, guid: 6573c42118d0c9e44954eedb941570c2, type: 2}
+  - {fileID: 11400000, guid: 192b59486539d844fa38bb3e9e24df99, type: 2}
   _experience: {fileID: 480897058}
   _playerHealth: {fileID: 480897055}
 --- !u!4 &1430690575
