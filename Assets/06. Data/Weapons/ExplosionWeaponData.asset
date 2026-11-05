@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853b1571b728300488bdb2f598f6b393, type: 3}
+  m_Name: ExplosionWeaponData
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Weapons.ExplosionWeaponData
+  _damage: 6
+  _weaponPrefab: {fileID: 3472599808743751646, guid: 4c29b82fea10a0849bfedf0efdde0829, type: 3}
+  _cooldown: 2.5
+  _range: 6
+  _explosionRadius: 1.5
