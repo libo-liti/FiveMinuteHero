@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2a82c7287985d1a4280614f238acb309, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4079267101981166164}
   - component: {fileID: 8965328681123295679}
   - component: {fileID: 711410368790973351}
+  - component: {fileID: 3109997730981039016}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -262,3 +263,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ed29da4c4fa3041ad1a6879ab26f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyHealth
+--- !u!114 &3109997730981039016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937785058895415110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147bae1daa33feb408ca7b4a72a60a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemyHitFlash
+  _health: {fileID: 711410368790973351}
+  _renderer: {fileID: 133661839213702481}
+  _duration: 0.1
