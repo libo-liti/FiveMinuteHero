@@ -1,5 +1,6 @@
 using System.Globalization;
 using FiveMinuteHero.Enemies;
+using FiveMinuteHero.Pickups;
 using FiveMinuteHero.Player;
 using Jonghyun.Core.Perf;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace FiveMinuteHero.Benchmark
         [SerializeField] private PerfOverlay _overlay;
         [SerializeField] private EnemySpawner _spawner;
         [SerializeField] private EnemyRegistry _registry;
+        [SerializeField] private GemDropper _gemDropper;
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private GameObject _menu;
         [SerializeField] private Button[] _countButtons; // _settings.EnemyCounts와 같은 순서
@@ -39,6 +41,7 @@ namespace FiveMinuteHero.Benchmark
         private float _warmupTimer;
         private int _enemyCount;
         private long _aliveCountSum; // 측정 중 매 프레임 살아 있는 적 수의 합. 평균을 내서 "정말 유지됐는지" 결과에 남긴다.
+        private long _gemCountSum;   // 측정 중 매 프레임 바닥에 남은 젬 수의 합. 처치가 많을수록 젬 비용도 커지므로 조건으로 남긴다.
 
         private void Awake()
         {
@@ -74,6 +77,7 @@ namespace FiveMinuteHero.Benchmark
 
                 case Phase.Measuring:
                     _aliveCountSum += _registry.Count;
+                    _gemCountSum += _gemDropper.ActiveGemCount;
                     if (_sampler.Elapsed >= _settings.MeasureSeconds)
                     {
                         FinishMeasuring();
@@ -116,6 +120,8 @@ namespace FiveMinuteHero.Benchmark
             _enemyCount = enemyCount;
             // 메뉴에서 기다린 시간과 상관없이 같은 난수 순서가 되도록, 스폰이 시작되기 직전에 시드를 넣는다.
             Random.InitState(_settings.Seed);
+            // 스폰은 자기 전용 난수를 쓴다. 무기가 위 전역 난수를 몇 번 쓰든 스폰 위치·종류 순서는 시드만으로 정해진다.
+            _spawner.SetSeed(_settings.Seed);
             _playerHealth.SetInvincible(true);
             _spawner.SetMaintainCount(enemyCount, _settings.MaxSpawnPerFrame);
             _spawner.enabled = true;
@@ -129,6 +135,7 @@ namespace FiveMinuteHero.Benchmark
         private void BeginMeasuring()
         {
             _aliveCountSum = 0;
+            _gemCountSum = 0;
             _sampler.Begin();
             _phase = Phase.Measuring;
         }
@@ -141,9 +148,10 @@ namespace FiveMinuteHero.Benchmark
             Time.timeScale = PausedTimeScale;
 
             float averageAlive = report.FrameCount > 0 ? (float)_aliveCountSum / report.FrameCount : 0f;
-            // 측정이 끝난 뒤라 문자열 할당은 결과에 섞이지 않는다.
-            string label = string.Format(CultureInfo.InvariantCulture, "enemies={0} aliveAvg={1:0} seed={2}",
-                _enemyCount, averageAlive, _settings.Seed);
+            float averageGems = report.FrameCount > 0 ? (float)_gemCountSum / report.FrameCount : 0f;
+            // 측정이 끝난 뒤라 문자열 할당은 결과에 섞이지 않는다. 게임 용어(적·젬)는 Core.Perf가 아니라 여기 라벨에만 둔다.
+            string label = string.Format(CultureInfo.InvariantCulture, "enemies={0} aliveAvg={1:0} gemAvg={2:0} seed={3}",
+                _enemyCount, averageAlive, averageGems, _settings.Seed);
 
             // Release 빌드에서도 logcat(Unity 태그)에 남아서 adb로 결과를 모을 수 있다.
             Debug.Log(report.ToLogLine(label));

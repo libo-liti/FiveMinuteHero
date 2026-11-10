@@ -24,7 +24,7 @@ namespace FiveMinuteHero.Flow
         [SerializeField] private GameSession _gameSession;
         [SerializeField] private LevelUpController _levelUpController;
 
-        // 판을 시작할 때 가진 무기. 씬마다 다르게 둘 수 있다(Benchmark는 측정 조건 때문에 마법탄만).
+        // 판을 시작할 때 가진 무기. 씬마다 다르게 둘 수 있다(Benchmark는 레벨업이 없어 후반 최대 부하를 재려고 무기 3종을 처음부터 가진다).
         [SerializeField] private WeaponData[] _startingWeapons;
         [SerializeField] private Transform _weaponMount;       // 무기를 붙일 플레이어 자식(몸 높이)
         [SerializeField] private EnemyRegistry _enemyRegistry; // 무기가 적을 찾을 때 쓴다. 프리팹 무기도 받을 수 있게 Init으로 넘긴다

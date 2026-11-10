@@ -18,6 +18,17 @@ namespace FiveMinuteHero.Enemies
         private int _maintainCount;     // 0이면 주기 스폰 모드
         private int _maxSpawnPerFrame;
 
+        // 스폰 전용 난수. UnityEngine.Random은 무기(폭발 대상 고르기) 등도 함께 써서, 고정 시드여도 무기가 몇 번 뽑았는지에 따라 스폰 순서가 밀린다.
+        // 자기만 쓰는 난수를 두면 다른 곳이 난수를 몇 번 쓰든 스폰 순서는 시드만으로 정해진다.
+        // 기본은 시간 기반 시드라 Main은 지금처럼 매판 무작위다. using System을 쓰면 UnityEngine.Random과 이름이 겹쳐 전체 이름으로 적는다.
+        private System.Random _random = new System.Random();
+
+        // 같은 시드면 매번 같은 순서로 스폰한다(벤치마크용). 스폰이 시작되기 전에 부른다.
+        public void SetSeed(int seed)
+        {
+            _random = new System.Random(seed);
+        }
+
         // count > 0이면 그 수를 유지한다. 1000마리를 한 프레임에 만들면 스파이크가 생기므로 프레임당 최대 maxSpawnPerFrame마리만 채운다.
         public void SetMaintainCount(int count, int maxSpawnPerFrame)
         {
@@ -45,7 +56,8 @@ namespace FiveMinuteHero.Enemies
 
         private void Spawn()
         {
-            Enemy prefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
+            // Next(min, max)도 끝 값을 포함하지 않으므로 Length를 그대로 넘긴다.
+            Enemy prefab = _enemyPrefabs[_random.Next(0, _enemyPrefabs.Length)];
             Enemy enemy = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity, transform);
             enemy.Init(_target);
 
@@ -71,13 +83,19 @@ namespace FiveMinuteHero.Enemies
             Vector2 center = _camera.transform.position;
 
             // 변 길이에 비례해 위·아래 변과 좌·우 변을 고른다. 세로 화면에서 긴 좌우 변에 더 많이 나와 테두리 전체에 고르게 퍼진다.
-            float sign = Random.value < 0.5f ? -1f : 1f;
-            if (Random.value < halfWidth / (halfWidth + halfHeight))
+            float sign = NextFloat(0f, 1f) < 0.5f ? -1f : 1f;
+            if (NextFloat(0f, 1f) < halfWidth / (halfWidth + halfHeight))
             {
-                return center + new Vector2(Random.Range(-halfWidth, halfWidth), sign * halfHeight);
+                return center + new Vector2(NextFloat(-halfWidth, halfWidth), sign * halfHeight);
             }
 
-            return center + new Vector2(sign * halfWidth, Random.Range(-halfHeight, halfHeight));
+            return center + new Vector2(sign * halfWidth, NextFloat(-halfHeight, halfHeight));
+        }
+
+        // System.Random에는 float 범위 함수가 없어서 0~1 값을 [min, max) 범위로 늘린다.
+        private float NextFloat(float min, float max)
+        {
+            return min + (float)_random.NextDouble() * (max - min);
         }
     }
 }

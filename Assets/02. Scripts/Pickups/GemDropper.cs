@@ -11,6 +11,10 @@ namespace FiveMinuteHero.Pickups
         [SerializeField] private PlayerExperience _collector;
         [SerializeField] private EnemyRegistry _registry;
 
+        // 바닥에 남아 있는 젬 수. 젬은 이 오브젝트 아래에만 생성되므로 자식 수가 곧 젬 수다(벤치마크 결과에 남긴다).
+        // Destroy는 프레임 끝에 처리되어, 이번 프레임에 먹힌 젬 몇 개가 함께 세질 수 있다. 평균에는 영향이 거의 없다.
+        public int ActiveGemCount => transform.childCount;
+
         private void OnEnable()
         {
             _registry.Registered += OnEnemyRegistered;
