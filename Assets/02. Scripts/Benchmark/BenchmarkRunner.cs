@@ -42,6 +42,7 @@ namespace FiveMinuteHero.Benchmark
         private int _enemyCount;
         private long _aliveCountSum; // 측정 중 매 프레임 살아 있는 적 수의 합. 평균을 내서 "정말 유지됐는지" 결과에 남긴다.
         private long _gemCountSum;   // 측정 중 매 프레임 바닥에 남은 젬 수의 합. 처치가 많을수록 젬 비용도 커지므로 조건으로 남긴다.
+        private int _diedCountAtBegin; // 측정 시작 때의 누적 처치 수. 끝 값에서 빼서 측정 구간의 처치 수만 남긴다(워밍업 처치는 빠진다).
 
         private void Awake()
         {
@@ -136,6 +137,7 @@ namespace FiveMinuteHero.Benchmark
         {
             _aliveCountSum = 0;
             _gemCountSum = 0;
+            _diedCountAtBegin = _registry.DiedCount;
             _sampler.Begin();
             _phase = Phase.Measuring;
         }
@@ -149,9 +151,11 @@ namespace FiveMinuteHero.Benchmark
 
             float averageAlive = report.FrameCount > 0 ? (float)_aliveCountSum / report.FrameCount : 0f;
             float averageGems = report.FrameCount > 0 ? (float)_gemCountSum / report.FrameCount : 0f;
+            // 유지 모드라 죽은 만큼 다시 스폰되므로 스폰 수와 거의 같다. 무기 부하(처치·젬·피격)의 크기를 측정 조건으로 남긴다.
+            int kills = _registry.DiedCount - _diedCountAtBegin;
             // 측정이 끝난 뒤라 문자열 할당은 결과에 섞이지 않는다. 게임 용어(적·젬)는 Core.Perf가 아니라 여기 라벨에만 둔다.
-            string label = string.Format(CultureInfo.InvariantCulture, "enemies={0} aliveAvg={1:0} gemAvg={2:0} seed={3}",
-                _enemyCount, averageAlive, averageGems, _settings.Seed);
+            string label = string.Format(CultureInfo.InvariantCulture, "enemies={0} aliveAvg={1:0} gemAvg={2:0} kills={3} seed={4}",
+                _enemyCount, averageAlive, averageGems, kills, _settings.Seed);
 
             // Release 빌드에서도 logcat(Unity 태그)에 남아서 adb로 결과를 모을 수 있다.
             Debug.Log(report.ToLogLine(label));

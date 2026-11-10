@@ -13,6 +13,8 @@ namespace FiveMinuteHero.Enemies
         public IReadOnlyList<Enemy> AliveEnemies => _aliveEnemies;
         // 성능 측정 도구가 현재 적 수를 읽는다.
         public int Count => _aliveEnemies.Count;
+        // 판 시작부터 죽은 적의 누적 수. 성능 측정 도구가 구간 시작·끝의 차이로 그 구간의 처치 수를 낸다.
+        public int DiedCount { get; private set; }
         // 젬 드롭 등이 새 적의 Died를 구독할 수 있게 알린다. 레지스트리는 구독자가 뭘 하는지 모른다.
         public event Action<Enemy> Registered;
 
@@ -27,6 +29,7 @@ namespace FiveMinuteHero.Enemies
         {
             // 목록에서 빼지 않으면 무기가 파괴된 적을 조준한다.
             _aliveEnemies.Remove(enemy);
+            DiedCount++;
         }
     }
 }
