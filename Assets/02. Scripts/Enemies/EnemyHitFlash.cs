@@ -26,6 +26,10 @@ namespace FiveMinuteHero.Enemies
         private void OnDisable()
         {
             _health.Damaged -= OnDamaged;
+
+            // 죽는 타격에도 하얗게 된 채 꺼진다. 풀에서 다시 나올 때 하얀 채로 등장하지 않게 꺼질 때 원래 색으로 돌려 둔다.
+            _remaining = 0f;
+            ApplyStrength(0f);
         }
 
         private void OnDamaged()

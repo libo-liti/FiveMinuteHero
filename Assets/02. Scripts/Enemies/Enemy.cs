@@ -35,9 +35,9 @@ namespace FiveMinuteHero.Enemies
 
         private void OnHealthDied()
         {
-            // 구독자에게 먼저 알린 뒤 제거한다. Destroy는 프레임 끝에 처리되어 구독자가 이 Enemy를 아직 읽을 수 있다.
+            // 알리기만 하고 스스로 사라지지 않는다. 치우는 일(풀 반납)은 만든 쪽(스포너)이 프레임 끝에 한다.
+            // 그래서 구독자는 Died 안에서 이 Enemy의 위치 등을 그대로 읽을 수 있다.
             Died?.Invoke(this);
-            Destroy(gameObject);
         }
     }
 }
