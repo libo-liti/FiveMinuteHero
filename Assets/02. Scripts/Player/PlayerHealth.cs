@@ -20,6 +20,10 @@ namespace FiveMinuteHero.Player
         public event Action Died;
 
         public bool IsDead => _currentHealth <= 0;
+        // 이벤트는 체력이 처음 바뀔 때까지 안 오므로, 체력바가 시작 상태를 그릴 때 읽는다.
+        public int CurrentHealth => _currentHealth;
+        // 최대치는 강화로 바뀌므로 따로 저장하지 않고 런타임 스탯에서 그때그때 읽는다.
+        public int MaxHealth => _stats.MaxHealth;
 
         // Bootstrap이 호출한다. 시작 체력은 주입받은 스탯으로 정하므로 Awake가 아니라 여기서 채운다.
         public void Init(PlayerRuntimeStats stats)
