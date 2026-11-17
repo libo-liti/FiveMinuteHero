@@ -8,16 +8,17 @@ namespace FiveMinuteHero.Upgrades
 {
     // 레벨업하면 게임을 멈추고 강화 후보를 뽑아 View에 알리고, 고른 강화를 적용한 뒤 재개한다.
     // 화면은 모른다. View가 ChoicesOffered를 듣고 카드를 띄운 뒤 Choose(index)로 결과를 돌려준다.
+    // 판이 끝나면(클리어·사망) 결과가 우선이다. 열린 창은 닫고, 새 창은 열지 않는다.
     public class LevelUpController : MonoBehaviour
     {
         private const int ChoiceCount = 3;
 
         [SerializeField] private UpgradeData[] _upgradePool; // 이번 판에 나올 수 있는 강화 전체
         [SerializeField] private PlayerExperience _experience;
-        [SerializeField] private PlayerHealth _playerHealth;
 
         private UpgradeContext _context;
         private IPauseService _pauseService;
+        private IRunState _runState;
 
         private readonly Dictionary<UpgradeData, int> _levels = new Dictionary<UpgradeData, int>(); // 강화별 현재 레벨. 없으면 0
         private int _pendingCount;  // 아직 고르지 않은 레벨업 수
@@ -29,17 +30,21 @@ namespace FiveMinuteHero.Upgrades
 
         // 보여 줄 선택지 목록. View가 구독한다. 읽기 전용으로 넘겨 View가 목록을 바꾸지 못하게 한다.
         public event Action<IReadOnlyList<UpgradeOption>> ChoicesOffered;
+        // 고르기 전에 창을 닫아야 할 때(판 종료) 알린다. View가 패널을 닫는다.
+        public event Action ChoicesClosed;
 
         // Bootstrap이 호출한다. 저장만 하고 Awake 캐싱 필드에는 기대지 않는다.
-        public void Init(UpgradeContext context, IPauseService pauseService)
+        // 정지와 판 상태는 둘 다 GameSession이 주지만, 필요한 창구만 따로 받아 Restart·EndRun 등을 모르게 한다.
+        public void Init(UpgradeContext context, IPauseService pauseService, IRunState runState)
         {
             _context = context;
             _pauseService = pauseService;
+            _runState = runState;
         }
 
         private void Start()
         {
-            if (_context == null || _pauseService == null)
+            if (_context == null || _pauseService == null || _runState == null)
             {
                 Debug.LogError("LevelUpController: Init을 받지 못했습니다. 씬의 Bootstrap 연결을 확인하세요.", this);
                 // 꺼 두면 OnDisable에서 구독이 풀려 레벨업 때 NullReference가 나지 않는다.
@@ -50,11 +55,21 @@ namespace FiveMinuteHero.Upgrades
         private void OnEnable()
         {
             _experience.LeveledUp += OnLeveledUp;
+            // Bootstrap은 실행 순서 -100이라 그 Awake(Init)가 이 오브젝트의 OnEnable보다 먼저 끝난다. 그래서 여기서 이미 _runState가 있다.
+            // Init을 못 받았으면 건너뛴다. 알리는 일은 Start의 LogError가 맡는다.
+            if (_runState != null)
+            {
+                _runState.RunEnded += OnRunEnded;
+            }
         }
 
         private void OnDisable()
         {
             _experience.LeveledUp -= OnLeveledUp;
+            if (_runState != null)
+            {
+                _runState.RunEnded -= OnRunEnded;
+            }
         }
 
         // View가 카드 클릭 시 호출한다. index는 ChoicesOffered로 넘긴 목록의 위치.
@@ -85,8 +100,9 @@ namespace FiveMinuteHero.Upgrades
 
         private void OnLeveledUp(int level)
         {
-            // 죽은 뒤 흡수된 젬으로 게임 오버 패널 위에 창이 뜨지 않게 한다.
-            if (_playerHealth.IsDead)
+            // 판이 끝난 뒤 정지 중에 흡수된 젬(이미 수집 거리 안에 있던 것)으로 결과 화면 위에 창이 뜨지 않게 한다.
+            // 사망만 보던 예전 검사로는 클리어(플레이어는 살아 있음) 뒤를 막지 못한다.
+            if (_runState.IsRunOver)
             {
                 return;
             }
@@ -145,6 +161,21 @@ namespace FiveMinuteHero.Upgrades
             }
 
             ChoicesOffered?.Invoke(_options);
+        }
+
+        // 창이 열린 프레임에 StageRunner가 판 길이를 넘기면, 창이 열린 채로 판이 끝날 수 있다. 결과가 우선이라 창을 닫는다.
+        private void OnRunEnded(RunOutcome outcome)
+        {
+            if (!_isChoosing)
+            {
+                return;
+            }
+
+            // 남은 레벨업은 버린다. 판이 끝났으니 고를 일이 없다.
+            _pendingCount = 0;
+            // 정지 요청 짝을 맞춘다. 판 종료 래치가 있어서 해제해도 게임은 멈춘 채로 남는다.
+            FinishChoosing();
+            ChoicesClosed?.Invoke();
         }
 
         private void FinishChoosing()

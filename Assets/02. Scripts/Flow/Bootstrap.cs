@@ -28,6 +28,7 @@ namespace FiveMinuteHero.Flow
         [SerializeField] private WeaponData[] _startingWeapons;
         [SerializeField] private Transform _weaponMount;       // 무기를 붙일 플레이어 자식(몸 높이)
         [SerializeField] private EnemyRegistry _enemyRegistry; // 무기가 적을 찾을 때 쓴다. 프리팹 무기도 받을 수 있게 Init으로 넘긴다
+        [SerializeField] private StageRunner _stageRunner;     // Main에만 있다. Benchmark는 비워 둔다
 
         private void Awake()
         {
@@ -48,10 +49,16 @@ namespace FiveMinuteHero.Flow
             // 강화가 바꿀 대상을 모은다.
             UpgradeContext context = new UpgradeContext(playerStats, weapons);
 
-            // Benchmark 씬에는 레벨업이 없어서 비워 둔다. GameSession은 IPauseService로 넘겨 컨트롤러가 Restart 등을 모르게 한다.
+            // Benchmark 씬에는 레벨업이 없어서 비워 둔다. GameSession은 IPauseService·IRunState로 넘겨 컨트롤러가 Restart 등을 모르게 한다.
             if (_levelUpController != null)
             {
-                _levelUpController.Init(context, _gameSession);
+                _levelUpController.Init(context, _gameSession, _gameSession);
+            }
+
+            // Benchmark 씬에는 판 타이머가 없어서 비워 둔다. GameSession은 IRunEndService로 넘겨 StageRunner가 판 종료 요청만 하게 한다.
+            if (_stageRunner != null)
+            {
+                _stageRunner.Init(_gameSession);
             }
         }
     }

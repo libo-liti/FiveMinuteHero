@@ -34,6 +34,7 @@ namespace FiveMinuteHero.UI
         private void OnEnable()
         {
             _controller.ChoicesOffered += OnChoicesOffered;
+            _controller.ChoicesClosed += OnChoicesClosed;
             for (int i = 0; i < _cards.Length; i++)
             {
                 _cards[i].Button.onClick.AddListener(_clickHandlers[i]);
@@ -43,6 +44,7 @@ namespace FiveMinuteHero.UI
         private void OnDisable()
         {
             _controller.ChoicesOffered -= OnChoicesOffered;
+            _controller.ChoicesClosed -= OnChoicesClosed;
             for (int i = 0; i < _cards.Length; i++)
             {
                 _cards[i].Button.onClick.RemoveListener(_clickHandlers[i]);
@@ -65,6 +67,12 @@ namespace FiveMinuteHero.UI
             }
 
             _panel.SetActive(true);
+        }
+
+        // 고르지 않고 닫힐 때(판 종료). 결과 화면만 남게 한다.
+        private void OnChoicesClosed()
+        {
+            _panel.SetActive(false);
         }
 
         private void OnCardClicked(int index)
