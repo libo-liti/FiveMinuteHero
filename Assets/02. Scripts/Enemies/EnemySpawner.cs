@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using FiveMinuteHero.Stages;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace FiveMinuteHero.Enemies
 {
     // 카메라 화면 바로 바깥에 적을 꺼내 놓고, 추적 대상을 주입한다. 죽은 적은 파괴하지 않고 풀에 돌려놓았다가 다시 쓴다.
-    // 평소엔 일정 간격으로 만들고, 유지 모드에선 살아 있는 수가 목표에 못 미치는 만큼 채운다(벤치마크용).
-    public class EnemySpawner : MonoBehaviour
+    // 평소엔 지금 웨이브의 간격·최대 수·종류대로 만들고, 유지 모드에선 살아 있는 수가 목표에 못 미치는 만큼 채운다(벤치마크용).
+    // 웨이브는 IWaveTarget으로 밖(StageRunner)에서 받는다. 이 클래스는 시간·스테이지를 모른다.
+    public class EnemySpawner : MonoBehaviour, IWaveTarget
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private Transform _target;
-        [SerializeField] private Enemy[] _enemyPrefabs;
-        [SerializeField, Min(0.01f)] private float _spawnInterval = 1f; // 초
+        [SerializeField] private Enemy[] _enemyPrefabs; // 풀 목록. 웨이브는 이 안의 프리팹만 쓸 수 있고, 유지 모드는 이 전체에서 뽑는다
         // 원점이 발이라 스프라이트가 위로 약 3유닛 솟는다. 아래쪽에서 나올 때도 안 보이도록 이만큼 띄운다.
         [SerializeField, Min(0f)] private float _spawnMargin = 3f;
         [SerializeField] private EnemyRegistry _registry;
@@ -22,6 +23,12 @@ namespace FiveMinuteHero.Enemies
         private readonly Dictionary<Enemy, int> _typeIndexByEnemy = new Dictionary<Enemy, int>();
         // 이번 프레임에 죽어서 LateUpdate에 반납할 적.
         private readonly List<Enemy> _pendingRelease = new List<Enemy>();
+        // 프리팹 → 풀 번호. 웨이브는 프리팹으로 적 종류를 적으므로, 어느 풀에서 꺼낼지 이 표로 찾는다.
+        private readonly Dictionary<Enemy, int> _poolIndexByPrefab = new Dictionary<Enemy, int>();
+        // 지금 웨이브에서 뽑을 풀 번호들. 웨이브가 바뀔 때만 다시 채우고, 스폰할 때는 사전을 찾지 않고 이 목록에서 바로 뽑는다.
+        private readonly List<int> _waveTypeIndices = new List<int>();
+        // 지금 웨이브(간격·최대 수를 읽는다). null이면 아직 웨이브를 받지 않은 것이다.
+        private WaveData _currentWave;
 
         private float _timer;
         private int _maintainCount;     // 0이면 주기 스폰 모드
@@ -44,6 +51,7 @@ namespace FiveMinuteHero.Enemies
                     actionOnRelease: ReleaseEnemy,
                     // 같은 적을 두 번 반납하면 에디터에서 에러로 잡는다. 검사가 풀 크기만큼 순회하므로 빌드(측정)에서는 끈다.
                     collectionCheck: Application.isEditor);
+                _poolIndexByPrefab.Add(_enemyPrefabs[i], i);
             }
 
             // 스포너가 꺼진 채 시작하는 씬(Benchmark)도 있어서, OnEnable 짝이 아니라 수명 전체에 걸쳐 구독한다.
@@ -76,6 +84,34 @@ namespace FiveMinuteHero.Enemies
             }
         }
 
+        // StageRunner가 판을 시작할 때 한 번, 웨이브가 바뀔 때마다 한 번 부른다(Awake 뒤라 사전이 준비돼 있다).
+        // 유지 모드(벤치마크)에는 쓰이지 않는다. 벤치마크 씬엔 StageRunner가 없어서 아무도 부르지 않는다.
+        public void ApplyWave(WaveData wave)
+        {
+            _currentWave = wave;
+
+            // 매번 새 목록을 만들지 않고 비운 뒤 다시 채워 재사용한다.
+            _waveTypeIndices.Clear();
+            for (int i = 0; i < wave.Enemies.Count; i++)
+            {
+                Enemy prefab = wave.Enemies[i];
+                // 빈 칸이거나 _enemyPrefabs에 없는 프리팹이면 꺼낼 풀이 없다. 데이터 실수이므로 알리고 그 칸만 건너뛴다.
+                if (prefab == null || !_poolIndexByPrefab.TryGetValue(prefab, out int poolIndex))
+                {
+                    string prefabName = prefab == null ? "(빈 칸)" : prefab.name;
+                    Debug.LogError($"EnemySpawner: 웨이브({wave.StartSeconds}초)의 {i}번 적 {prefabName}이(가) _enemyPrefabs에 없습니다.", this);
+                    continue;
+                }
+
+                _waveTypeIndices.Add(poolIndex);
+            }
+
+            if (_waveTypeIndices.Count == 0)
+            {
+                Debug.LogError($"EnemySpawner: 웨이브({wave.StartSeconds}초)에 나올 수 있는 적이 없습니다. 이 웨이브 동안 스폰하지 않습니다.", this);
+            }
+        }
+
         private void Update()
         {
             if (_maintainCount > 0)
@@ -84,14 +120,31 @@ namespace FiveMinuteHero.Enemies
                 return;
             }
 
-            _timer += Time.deltaTime;
-            if (_timer < _spawnInterval)
+            // 웨이브를 받기 전이거나, 받은 웨이브에 쓸 수 있는 적이 없으면(ApplyWave가 에러로 알림) 쉰다.
+            if (_currentWave == null || _waveTypeIndices.Count == 0)
             {
                 return;
             }
 
-            _timer -= _spawnInterval;
-            Spawn();
+            float interval = _currentWave.SpawnInterval;
+            _timer += Time.deltaTime;
+            if (_timer < interval)
+            {
+                return;
+            }
+
+            // 최대 수에 닿았으면 이번 차례는 건너뛴다. 타이머를 간격에 묶어 두어, 쉬는 동안 시간이 쌓였다가
+            // 자리가 났을 때 한꺼번에 몰려나오지 않고 바로 1마리만 나오게 한다.
+            if (_registry.Count >= _currentWave.MaxAlive)
+            {
+                _timer = interval;
+                return;
+            }
+
+            _timer -= interval;
+            // 지금 웨이브의 종류 중에서 균등하게 하나. 같은 프리팹을 여러 번 넣었으면 그만큼 자주 뽑힌다.
+            int typeIndex = _waveTypeIndices[_random.Next(0, _waveTypeIndices.Count)];
+            Spawn(typeIndex);
         }
 
         // Destroy가 처리되던 시점(이번 프레임의 Update 이후, 렌더 이전)과 맞춰 반납한다.
@@ -107,11 +160,10 @@ namespace FiveMinuteHero.Enemies
             _pendingRelease.Clear();
         }
 
-        private void Spawn()
+        // 종류는 부르는 쪽(유지 모드 / 주기 모드)이 골라서 넘긴다. 부르는 쪽이 종류를 먼저 뽑고 여기서 위치를 뽑으므로,
+        // 난수를 쓰는 순서(종류 → 위치)가 풀링 전과 같다. 그래야 같은 시드에서 스폰 순서가 같다.
+        private void Spawn(int typeIndex)
         {
-            // 난수를 쓰는 순서(종류 → 위치)를 풀링 전과 같게 둔다. 그래야 같은 시드에서 스폰 순서가 같다.
-            // Next(min, max)도 끝 값을 포함하지 않으므로 Length를 그대로 넘긴다.
-            int typeIndex = _random.Next(0, _enemyPrefabs.Length);
             Vector2 position = GetSpawnPosition();
 
             Enemy enemy = _pools[typeIndex].Get();
@@ -173,7 +225,10 @@ namespace FiveMinuteHero.Enemies
             int toSpawn = Mathf.Min(_maintainCount - _registry.Count, _maxSpawnPerFrame);
             for (int i = 0; i < toSpawn; i++)
             {
-                Spawn();
+                // 벤치마크 측정 조건이라 웨이브와 무관하게 _enemyPrefabs 전체에서 뽑는다(웨이브 도입 전과 같은 호출).
+                // Next(min, max)는 끝 값을 포함하지 않으므로 Length를 그대로 넘긴다.
+                int typeIndex = _random.Next(0, _enemyPrefabs.Length);
+                Spawn(typeIndex);
             }
         }
 

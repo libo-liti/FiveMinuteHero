@@ -492,7 +492,6 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
   - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
-  _spawnInterval: 1
   _spawnMargin: 3
   _registry: {fileID: 8658641360561361096}
 --- !u!114 &8658641360561361096

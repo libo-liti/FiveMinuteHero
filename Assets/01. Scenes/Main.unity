@@ -3085,6 +3085,7 @@ MonoBehaviour:
   _weaponMount: {fileID: 2023506696}
   _enemyRegistry: {fileID: 689824803}
   _stageRunner: {fileID: 1330399712}
+  _enemySpawner: {fileID: 2065364790938658433}
 --- !u!4 &1094343592
 Transform:
   m_ObjectHideFlags: 0
@@ -5543,6 +5544,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+--- !u!114 &2065364790938658433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3145164626655486711, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+  m_PrefabInstance: {fileID: 2065364790938658432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd1428d8dffe5e4f8fbc2b7cdf9837b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemySpawner
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
