@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace FiveMinuteHero.Weapons
 {
-    // 쿨타임마다 사거리 안의 적 하나를 무작위로 골라 그 자리에서 폭발한다. 주입과 주입 확인은 Weapon이 맡는다.
+    // 쿨타임마다 사거리 안의 적 하나를 무작위로 골라 그 자리에서 폭발한다.
+    // 주입과 주입 확인은 Weapon이, 쿨타임 흐름은 CooldownWeapon이 맡는다. 여기는 "한 번 폭발하기"만 정한다.
     // 가장 가까운 적은 마법탄이 맡으므로, 이 무기는 무작위로 골라 뒤쪽 적까지 닿게 한다.
-    public class ExplosionWeapon : Weapon
+    public class ExplosionWeapon : CooldownWeapon
     {
         // 수치가 아니라 이 무기의 외형이라서 런타임 스탯이 아니라 무기 쪽이 들고 있다.
         [SerializeField] private ExplosionEffect _effectPrefab;
@@ -18,31 +19,23 @@ namespace FiveMinuteHero.Weapons
         // 폭발마다 새 리스트를 만들지 않도록 비우고 다시 쓴다.
         private readonly List<Enemy> _candidates = new List<Enemy>();
 
-        private float _timer;
-
         // 런타임 스탯은 어떤 무기인지 모르므로, 이 무기가 쓰는 스탯을 여기서 이름 붙여 꺼낸다.
-        private float Cooldown => Stats.Get(WeaponStatType.Cooldown);
+        // 쿨다운은 CooldownWeapon이 직접 읽으므로 여기에 없다.
         private float Range => Stats.Get(WeaponStatType.Range);
         private float Radius => Stats.Get(WeaponStatType.ExplosionRadius);
 
-        private void Update()
+        // 사거리 안에 적이 없으면 아무것도 하지 않고 false. CooldownWeapon이 쿨타임이 찬 채로 기다린다.
+        // 목표는 적이지만 폭발에 필요한 것은 위치뿐이라, 적의 위치만 넘긴다. 부모는 이 차이를 모른다.
+        protected override bool TryAttack()
         {
-            _timer += Time.deltaTime;
-            if (_timer < Cooldown)
-            {
-                return;
-            }
-
             Enemy target = PickRandomTarget();
             if (target == null)
             {
-                // 쿨타임이 찬 채로 기다리다가, 적이 사거리에 들어오는 즉시 폭발한다.
-                _timer = Cooldown;
-                return;
+                return false;
             }
 
-            _timer -= Cooldown;
             Explode(target.AimPoint);
+            return true;
         }
 
         // perf-baseline 전이라 살아 있는 적 전체를 단순 순회한다(O(n)). 사거리 안에 적이 없으면 null.

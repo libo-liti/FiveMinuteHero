@@ -41,6 +41,13 @@ namespace FiveMinuteHero.Weapons
             _isLocked = true;
         }
 
+        // 이 무기가 이 스탯을 가졌는지. Get과 달리 없어도 에러를 남기지 않는다.
+        // 무기가 시작할 때 "필요한 스탯이 있는지"를 한 번만 확인하는 용도다.
+        public bool Has(WeaponStatType stat)
+        {
+            return _stats.ContainsKey(stat);
+        }
+
         // 현재 값(기본 + 보너스). 이 무기에 없는 스탯이면 알리고 0을 돌려준다.
         public float Get(WeaponStatType stat)
         {
