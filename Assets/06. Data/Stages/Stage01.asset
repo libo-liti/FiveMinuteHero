@@ -13,3 +13,34 @@ MonoBehaviour:
   m_Name: Stage01
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Stages.StageData
   _durationSeconds: 300
+  _waves:
+  - _startSeconds: 0
+    _spawnInterval: 1
+    _maxAlive: 15
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+  - _startSeconds: 60
+    _spawnInterval: 0.7
+    _maxAlive: 30
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+  - _startSeconds: 120
+    _spawnInterval: 0.5
+    _maxAlive: 50
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+  - _startSeconds: 180
+    _spawnInterval: 0.35
+    _maxAlive: 80
+    _enemies:
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+  - _startSeconds: 240
+    _spawnInterval: 0.25
+    _maxAlive: 120
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}

@@ -29,6 +29,7 @@ namespace FiveMinuteHero.Flow
         [SerializeField] private Transform _weaponMount;       // 무기를 붙일 플레이어 자식(몸 높이)
         [SerializeField] private EnemyRegistry _enemyRegistry; // 무기가 적을 찾을 때 쓴다. 프리팹 무기도 받을 수 있게 Init으로 넘긴다
         [SerializeField] private StageRunner _stageRunner;     // Main에만 있다. Benchmark는 비워 둔다
+        [SerializeField] private EnemySpawner _enemySpawner;   // StageRunner에 웨이브 대상으로 넘긴다. Benchmark는 비워 둔다(유지 모드는 BenchmarkRunner가 직접 다룬다)
 
         private void Awake()
         {
@@ -56,9 +57,10 @@ namespace FiveMinuteHero.Flow
             }
 
             // Benchmark 씬에는 판 타이머가 없어서 비워 둔다. GameSession은 IRunEndService로 넘겨 StageRunner가 판 종료 요청만 하게 한다.
+            // 스포너는 IWaveTarget으로 넘겨 StageRunner가 웨이브를 넣는 일만 하게 한다.
             if (_stageRunner != null)
             {
-                _stageRunner.Init(_gameSession);
+                _stageRunner.Init(_gameSession, _enemySpawner);
             }
         }
     }

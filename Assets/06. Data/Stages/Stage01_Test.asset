@@ -13,3 +13,25 @@ MonoBehaviour:
   m_Name: Stage01_Test
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Stages.StageData
   _durationSeconds: 20
+  _waves:
+  - _startSeconds: 0
+    _spawnInterval: 1
+    _maxAlive: 5
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+  - _startSeconds: 5
+    _spawnInterval: 0.3
+    _maxAlive: 15
+    _enemies:
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+  - _startSeconds: 10
+    _spawnInterval: 0.15
+    _maxAlive: 40
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
+    - {fileID: 4851615242222164486, guid: 83192e0228362fd4197b4f84670ed39b, type: 3}
+  - _startSeconds: 15
+    _spawnInterval: 0.5
+    _maxAlive: 10
+    _enemies:
+    - {fileID: 8965328681123295679, guid: 0603c1ad33297eb4697e706ae5875344, type: 3}
