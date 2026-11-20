@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 3251121474833307626}
   - component: {fileID: 5393379792565816221}
   - component: {fileID: 5586975157271746577}
+  - component: {fileID: 6323240181660901938}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -307,6 +308,18 @@ MonoBehaviour:
   _center: {x: 0, y: 0}
   _radius: 4
   _correctionStrength: 1
+--- !u!114 &6323240181660901938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100100028009853102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06005fb154f8bb5428dc5202408460da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Items.PlayerItemCollector
 --- !u!1 &8166556545237301628
 GameObject:
   m_ObjectHideFlags: 0

@@ -1130,6 +1130,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296092053}
   m_CullTransparentMesh: 1
+--- !u!114 &369570984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3282715443790015746, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+  m_PrefabInstance: {fileID: 747371855}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a111c8dff54177a47abfa641e84981e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Flow.GameSession
 --- !u!1 &403151552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1771,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+--- !u!114 &747371856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222779312812446537, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+  m_PrefabInstance: {fileID: 747371855}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06005fb154f8bb5428dc5202408460da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Items.PlayerItemCollector
 --- !u!4 &747371857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7134727107947070856, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
@@ -2430,7 +2452,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 747371860}
   _playerHealth: {fileID: 747371861}
   _playerExperience: {fileID: 747371859}
-  _gameSession: {fileID: 0}
+  _gameSession: {fileID: 369570984}
   _levelUpController: {fileID: 0}
   _startingWeapons:
   - {fileID: 11400000, guid: f22105f16f7e70d4f98fed7c1e4ced78, type: 2}
@@ -2439,6 +2461,9 @@ MonoBehaviour:
   _weaponMount: {fileID: 747371857}
   _enemyRegistry: {fileID: 747371863}
   _stageRunner: {fileID: 0}
+  _enemySpawner: {fileID: 0}
+  _itemCollector: {fileID: 747371856}
+  _gemDropper: {fileID: 747371862}
 --- !u!4 &1011655494
 Transform:
   m_ObjectHideFlags: 0

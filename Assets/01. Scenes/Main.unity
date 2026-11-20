@@ -1933,6 +1933,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae12a1a3a599a64494389c85068fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Player.PlayerExperience
+--- !u!1 &506597744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506597746}
+  - component: {fileID: 506597745}
+  m_Layer: 0
+  m_Name: ItemDropper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &506597745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506597744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0899ab523abc814cac8b2cef6d4ada2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Items.ItemDropper
+  _table: {fileID: 11400000, guid: 07e2d94c83cc35b40b49330b33d56b88, type: 2}
+  _pickupPrefab: {fileID: 2290635942245941596, guid: ac75e94db9cda8a4da2dd2745b7dff6b, type: 3}
+  _collector: {fileID: 2065364790938658434}
+  _registry: {fileID: 689824803}
+--- !u!4 &506597746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506597744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511047674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3086,6 +3134,8 @@ MonoBehaviour:
   _enemyRegistry: {fileID: 689824803}
   _stageRunner: {fileID: 1330399712}
   _enemySpawner: {fileID: 2065364790938658433}
+  _itemCollector: {fileID: 2065364790938658434}
+  _gemDropper: {fileID: 2065364790938658435}
 --- !u!4 &1094343592
 Transform:
   m_ObjectHideFlags: 0
@@ -5558,6 +5608,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd1428d8dffe5e4f8fbc2b7cdf9837b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Enemies.EnemySpawner
+--- !u!114 &2065364790938658434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222779312812446537, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+  m_PrefabInstance: {fileID: 2065364790938658432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06005fb154f8bb5428dc5202408460da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Items.PlayerItemCollector
+--- !u!114 &2065364790938658435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4483164628261029707, guid: e2747d6ab5716ad489b2177133c6ad81, type: 3}
+  m_PrefabInstance: {fileID: 2065364790938658432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b1334eb32cbcc42935e371e83454b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FiveMinuteHero.Game::FiveMinuteHero.Pickups.GemDropper
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5570,3 +5642,4 @@ SceneRoots:
   - {fileID: 1307840991}
   - {fileID: 1430690575}
   - {fileID: 1330399713}
+  - {fileID: 506597746}
