@@ -1,4 +1,6 @@
 using FiveMinuteHero.Enemies;
+using FiveMinuteHero.Items;
+using FiveMinuteHero.Pickups;
 using FiveMinuteHero.Player;
 using FiveMinuteHero.Upgrades;
 using FiveMinuteHero.Weapons;
@@ -30,6 +32,8 @@ namespace FiveMinuteHero.Flow
         [SerializeField] private EnemyRegistry _enemyRegistry; // 무기가 적을 찾을 때 쓴다. 프리팹 무기도 받을 수 있게 Init으로 넘긴다
         [SerializeField] private StageRunner _stageRunner;     // Main에만 있다. Benchmark는 비워 둔다
         [SerializeField] private EnemySpawner _enemySpawner;   // StageRunner에 웨이브 대상으로 넘긴다. Benchmark는 비워 둔다(유지 모드는 BenchmarkRunner가 직접 다룬다)
+        [SerializeField] private PlayerItemCollector _itemCollector; // 플레이어 프리팹에 있어 두 씬 모두 연결한다
+        [SerializeField] private GemDropper _gemDropper;             // 자석 아이템의 대상. IGemAttractor로만 넘긴다
 
         private void Awake()
         {
@@ -62,6 +66,11 @@ namespace FiveMinuteHero.Flow
             {
                 _stageRunner.Init(_gameSession, _enemySpawner);
             }
+
+            // 아이템 효과가 바꿀 대상을 모은다. 수집 창구는 플레이어에 붙어 있어 Benchmark에도 있으므로 두 씬 모두 Init한다(Start의 확인이 에러를 내지 않게).
+            // Benchmark에는 아이템을 떨어뜨리는 쪽(ItemDropper)이 없어서 이 창구가 실제로 불리지 않는다.
+            ItemContext itemContext = new ItemContext(_playerHealth, _gemDropper);
+            _itemCollector.Init(itemContext, _gameSession);
         }
     }
 }

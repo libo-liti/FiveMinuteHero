@@ -68,6 +68,26 @@ namespace FiveMinuteHero.Player
             }
         }
 
+        // 회복 아이템 등이 호출한다. 최대 체력을 넘지 않게 자르고, 실제로 바뀌었을 때만 알린다.
+        public void Heal(int amount)
+        {
+            // 죽은 뒤에 체력이 올라 되살아나지 않게 한다. 0 이하는 회복이 아니므로 무시한다.
+            if (IsDead || amount <= 0)
+            {
+                return;
+            }
+
+            int healed = Mathf.Min(_currentHealth + amount, _stats.MaxHealth);
+            // 이미 가득 차 있으면 값이 그대로라 HP바가 다시 그릴 필요가 없다.
+            if (healed == _currentHealth)
+            {
+                return;
+            }
+
+            _currentHealth = healed;
+            HealthChanged?.Invoke(_currentHealth, _stats.MaxHealth);
+        }
+
         // 최대 체력 강화를 고르면 늘어난 만큼 현재 체력도 채운다. 줄어든 경우에도 새 최대치를 넘지 않게 자른다.
         private void OnMaxHealthChanged(int oldMax, int newMax)
         {
