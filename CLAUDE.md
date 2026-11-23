@@ -77,7 +77,7 @@ Packages/com.jonghyun.core/        공통 모듈 임베디드 패키지
   package.json
   Runtime/<Module>/Jonghyun.Core.<Module>.asmdef
 ```
-- 현재 asmdef: `Jonghyun.Core.Perf`(참조 없음), `FiveMinuteHero.Game`(→ Core.Perf, Unity.InputSystem, UnityEngine.UI, Unity.TextMeshPro).
+- 현재 asmdef: `Jonghyun.Core.Perf`(참조 없음), `FiveMinuteHero.Game`(→ Core.Perf, Unity.InputSystem, UnityEngine.UI, Unity.TextMeshPro), `FiveMinuteHero.Editor`(Editor 플랫폼 전용, 참조 없음, 에디터 도구용).
 - 모듈(Core.Save, Core.Ads, Core.Analytics, Core.Assets, Core.Pool)은 **실제로 쓸 때** 하나씩 추가한다. 미리 만들지 않는다.
 - 네임스페이스: 게임은 `FiveMinuteHero.<영역>`, 모듈은 `Jonghyun.Core.<Module>`.
 
